@@ -1,4 +1,4 @@
-#pragma once //헤더파일 중복, 순환참조, 중복정의를 방지하기 위해 사용한다.
+#pragma once //헤더파일 중복, 순환참조, 중복정의를 방지하기 위해 사용한다./
 #include <SDL2/SDL.h>
 
 class Game
