@@ -48,7 +48,8 @@ void Game::handleEvents()
 {
     SDL_Event event;
 
-    if (SDL_PollEvent(&event))
+    //사용자의 특정 신호의 입력 등 언제 발생할지 모르는 조건에 대해 반복할 때는 while문을 쓰는 것이 적합하다.
+    while (SDL_PollEvent(&event))
     {
         switch (event.type)
         {
