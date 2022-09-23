@@ -1,1 +1,134 @@
-<mxfile host="app.diagrams.net" modified="2022-09-23T03:55:00.749Z" agent="5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/105.0.0.0 Safari/537.36" version="20.3.3" etag="cZpSbQegQ3m4-NY-cQ2x" type="github"><diagram id="_WHPBKE9ARS-mTUjOSZl">UzV2zq1wL0osyPDNT0nNUTV2VTV2LsrPL4GwciucU3NyVI0MMlNUjV1UjYwMgFjVyA2HrCFY1qAgsSg1rwSLBiADYTaQg2Y1AA==</diagram></mxfile>
+<mxfile host="app.diagrams.net" modified="2022-09-23T04:35:23.203Z" agent="5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/105.0.0.0 Safari/537.36" etag="gSVP8bprsFETNuizyeWK" version="20.3.3" type="github">
+  <diagram id="_WHPBKE9ARS-mTUjOSZl" name="페이지-1">
+    <mxGraphModel dx="1038" dy="617" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="827" pageHeight="1169" math="0" shadow="0">
+      <root>
+        <mxCell id="0" />
+        <mxCell id="1" parent="0" />
+        <mxCell id="NobiFyfaE2QnjdYYgfK_-18" value="loop" style="shape=umlFrame;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+          <mxGeometry x="174" y="360" width="499" height="330" as="geometry" />
+        </mxCell>
+        <mxCell id="NobiFyfaE2QnjdYYgfK_-1" value="Game" style="shape=umlLifeline;perimeter=lifelinePerimeter;whiteSpace=wrap;html=1;container=1;collapsible=0;recursiveResize=0;outlineConnect=0;" vertex="1" parent="1">
+          <mxGeometry x="373.5" y="140" width="101" height="690" as="geometry" />
+        </mxCell>
+        <mxCell id="NobiFyfaE2QnjdYYgfK_-6" value="" style="html=1;points=[];perimeter=orthogonalPerimeter;" vertex="1" parent="NobiFyfaE2QnjdYYgfK_-1">
+          <mxGeometry x="45" y="70" width="10" height="40" as="geometry" />
+        </mxCell>
+        <mxCell id="NobiFyfaE2QnjdYYgfK_-8" value="" style="html=1;points=[];perimeter=orthogonalPerimeter;" vertex="1" parent="NobiFyfaE2QnjdYYgfK_-1">
+          <mxGeometry x="45" y="130" width="10" height="70" as="geometry" />
+        </mxCell>
+        <mxCell id="NobiFyfaE2QnjdYYgfK_-24" value="" style="html=1;points=[];perimeter=orthogonalPerimeter;" vertex="1" parent="NobiFyfaE2QnjdYYgfK_-1">
+          <mxGeometry x="45.5" y="460" width="10" height="40" as="geometry" />
+        </mxCell>
+        <mxCell id="NobiFyfaE2QnjdYYgfK_-20" value="" style="html=1;points=[];perimeter=orthogonalPerimeter;" vertex="1" parent="NobiFyfaE2QnjdYYgfK_-1">
+          <mxGeometry x="45" y="300" width="10" height="40" as="geometry" />
+        </mxCell>
+        <mxCell id="NobiFyfaE2QnjdYYgfK_-22" value="" style="html=1;points=[];perimeter=orthogonalPerimeter;" vertex="1" parent="NobiFyfaE2QnjdYYgfK_-1">
+          <mxGeometry x="45.5" y="405" width="10" height="40" as="geometry" />
+        </mxCell>
+        <mxCell id="NobiFyfaE2QnjdYYgfK_-2" value="Main" style="shape=umlLifeline;perimeter=lifelinePerimeter;whiteSpace=wrap;html=1;container=1;collapsible=0;recursiveResize=0;outlineConnect=0;" vertex="1" parent="1">
+          <mxGeometry x="183" y="140" width="106" height="690" as="geometry" />
+        </mxCell>
+        <mxCell id="NobiFyfaE2QnjdYYgfK_-7" value="g_game = new Game()" style="html=1;verticalAlign=bottom;startArrow=oval;endArrow=block;startSize=8;rounded=0;" edge="1" target="NobiFyfaE2QnjdYYgfK_-6" parent="1" source="NobiFyfaE2QnjdYYgfK_-2">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="229" y="210" as="sourcePoint" />
+            <Array as="points">
+              <mxPoint x="319.5" y="210" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="NobiFyfaE2QnjdYYgfK_-9" value="init()" style="html=1;verticalAlign=bottom;endArrow=block;entryX=0;entryY=0;rounded=0;" edge="1" target="NobiFyfaE2QnjdYYgfK_-8" parent="1" source="NobiFyfaE2QnjdYYgfK_-2">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="388" y="290" as="sourcePoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="NobiFyfaE2QnjdYYgfK_-10" value="m_bRunning = true" style="html=1;verticalAlign=bottom;endArrow=open;dashed=1;endSize=8;exitX=0;exitY=0.95;rounded=0;" edge="1" source="NobiFyfaE2QnjdYYgfK_-8" parent="1" target="NobiFyfaE2QnjdYYgfK_-2">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="388" y="366" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="NobiFyfaE2QnjdYYgfK_-11" value="Interface" style="shape=umlLifeline;perimeter=lifelinePerimeter;whiteSpace=wrap;html=1;container=1;collapsible=0;recursiveResize=0;outlineConnect=0;" vertex="1" parent="1">
+          <mxGeometry x="549" y="140" width="100" height="690" as="geometry" />
+        </mxCell>
+        <mxCell id="NobiFyfaE2QnjdYYgfK_-32" value="" style="html=1;points=[];perimeter=orthogonalPerimeter;" vertex="1" parent="NobiFyfaE2QnjdYYgfK_-11">
+          <mxGeometry x="45" y="145" width="10" height="40" as="geometry" />
+        </mxCell>
+        <mxCell id="NobiFyfaE2QnjdYYgfK_-34" value="" style="html=1;points=[];perimeter=orthogonalPerimeter;" vertex="1" parent="NobiFyfaE2QnjdYYgfK_-11">
+          <mxGeometry x="45" y="480" width="10" height="40" as="geometry" />
+        </mxCell>
+        <mxCell id="NobiFyfaE2QnjdYYgfK_-36" value="" style="html=1;points=[];perimeter=orthogonalPerimeter;" vertex="1" parent="NobiFyfaE2QnjdYYgfK_-11">
+          <mxGeometry x="45" y="320" width="10" height="50" as="geometry" />
+        </mxCell>
+        <mxCell id="NobiFyfaE2QnjdYYgfK_-17" value="clean()" style="html=1;verticalAlign=bottom;startArrow=oval;endArrow=block;startSize=8;rounded=0;" edge="1" target="NobiFyfaE2QnjdYYgfK_-16" parent="1" source="NobiFyfaE2QnjdYYgfK_-2">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="398" y="470" as="sourcePoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="NobiFyfaE2QnjdYYgfK_-19" value="[until m_bRunning = false]" style="text;html=1;resizable=0;autosize=1;align=center;verticalAlign=middle;points=[];fillColor=none;strokeColor=none;rounded=0;" vertex="1" parent="1">
+          <mxGeometry x="156" y="390" width="160" height="30" as="geometry" />
+        </mxCell>
+        <mxCell id="NobiFyfaE2QnjdYYgfK_-21" value="handleEvents()" style="html=1;verticalAlign=bottom;startArrow=oval;endArrow=block;startSize=8;rounded=0;" edge="1" target="NobiFyfaE2QnjdYYgfK_-20" parent="1" source="NobiFyfaE2QnjdYYgfK_-2">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="359" y="420" as="sourcePoint" />
+            <Array as="points">
+              <mxPoint x="270" y="440" />
+              <mxPoint x="380" y="440" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="NobiFyfaE2QnjdYYgfK_-23" value="update()" style="html=1;verticalAlign=bottom;startArrow=oval;endArrow=block;startSize=8;rounded=0;" edge="1" target="NobiFyfaE2QnjdYYgfK_-22" parent="1" source="NobiFyfaE2QnjdYYgfK_-2">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="359" y="480" as="sourcePoint" />
+            <Array as="points">
+              <mxPoint x="280" y="550" />
+              <mxPoint x="310" y="550" />
+              <mxPoint x="390" y="550" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="NobiFyfaE2QnjdYYgfK_-33" value="SDL_CreateWindow()" style="html=1;verticalAlign=bottom;startArrow=oval;endArrow=block;startSize=8;rounded=0;" edge="1" target="NobiFyfaE2QnjdYYgfK_-32" parent="1" source="NobiFyfaE2QnjdYYgfK_-8">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="534" y="280" as="sourcePoint" />
+            <Array as="points">
+              <mxPoint x="500" y="290" />
+              <mxPoint x="540" y="290" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="NobiFyfaE2QnjdYYgfK_-35" value="SDL_RenderClear()&lt;br&gt;SDL_RenderPresent()" style="html=1;verticalAlign=bottom;startArrow=oval;endArrow=block;startSize=8;rounded=0;" edge="1" target="NobiFyfaE2QnjdYYgfK_-34" parent="1" source="NobiFyfaE2QnjdYYgfK_-24">
+          <mxGeometry x="0.0796" relative="1" as="geometry">
+            <mxPoint x="534" y="565" as="sourcePoint" />
+            <Array as="points">
+              <mxPoint x="540" y="620" />
+            </Array>
+            <mxPoint as="offset" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="NobiFyfaE2QnjdYYgfK_-37" value="SDL_QUIT()" style="html=1;verticalAlign=bottom;endArrow=block;entryX=0;entryY=0;rounded=0;" edge="1" target="NobiFyfaE2QnjdYYgfK_-36" parent="1" source="NobiFyfaE2QnjdYYgfK_-20">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="524" y="430" as="sourcePoint" />
+            <Array as="points">
+              <mxPoint x="560" y="460" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="NobiFyfaE2QnjdYYgfK_-25" value="render()" style="html=1;verticalAlign=bottom;startArrow=oval;endArrow=block;startSize=8;rounded=0;" edge="1" parent="1" target="NobiFyfaE2QnjdYYgfK_-24" source="NobiFyfaE2QnjdYYgfK_-2">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="240" y="540" as="sourcePoint" />
+            <Array as="points">
+              <mxPoint x="260" y="600" />
+              <mxPoint x="340" y="600" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="NobiFyfaE2QnjdYYgfK_-16" value="" style="html=1;points=[];perimeter=orthogonalPerimeter;" vertex="1" parent="1">
+          <mxGeometry x="418.5" y="730" width="10" height="40" as="geometry" />
+        </mxCell>
+        <mxCell id="NobiFyfaE2QnjdYYgfK_-38" value="m_bRunning = false" style="html=1;verticalAlign=bottom;endArrow=open;dashed=1;endSize=8;exitX=0;exitY=0.95;rounded=0;" edge="1" source="NobiFyfaE2QnjdYYgfK_-36" parent="1" target="NobiFyfaE2QnjdYYgfK_-2">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="524" y="506" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+      </root>
+    </mxGraphModel>
+  </diagram>
+</mxfile>
