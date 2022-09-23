@@ -3,6 +3,8 @@
 bool Game::init(const char* title, int xpos, int ypos, int width, int height, int flags)
 {
     if (SDL_Init(SDL_INIT_EVERYTHING) == 0) {
+
+        //윈도우 생성
         m_pWindow = SDL_CreateWindow(
             title, xpos, ypos, width, height, flags);
         if (m_pWindow != 0) {
@@ -10,15 +12,35 @@ bool Game::init(const char* title, int xpos, int ypos, int width, int height, in
 
             if (m_pRenderer != 0) {
                 SDL_SetRenderDrawColor(
-                    m_pRenderer, 255, 255, 255, 255);
+                    m_pRenderer, 0, 0, 0, 255);
             }
             else {
                 return false; // 랜더러 생성 실패
             }
         }
         else {
-            return false; // 윈도우 생설 실패 l
+            return false; // 윈도우 생성 실패
         }
+
+        //Texture 생성
+        SDL_Surface* pTempSurface = SDL_LoadBMP("assets/rider.bmp");
+
+        m_pTexture = SDL_CreateTextureFromSurface(m_pRenderer, pTempSurface);
+
+        SDL_FreeSurface(pTempSurface);
+
+        //원본상자의 W(가로), H(세로) 길이 설정
+        SDL_QueryTexture(m_pTexture, NULL, NULL,
+            &m_sourceRectangle.w, &m_sourceRectangle.h);
+
+        //대상상자의 가로, 세로 길이를 원본상자의 길이로 설정
+        m_destinationRectangle.w = m_sourceRectangle.w;
+        m_destinationRectangle.h = m_sourceRectangle.h;
+
+        //대상상자, 원본상자의 좌표 위치 설정
+        m_destinationRectangle.x = m_sourceRectangle.x = 0;
+        m_destinationRectangle.y = m_sourceRectangle.y = 0;
+
     }
     else {
         return false; // SDL 초기화 실패
@@ -30,13 +52,14 @@ bool Game::init(const char* title, int xpos, int ypos, int width, int height, in
 
 void Game::update()
 {
-
+ 
 }
 
 void Game::render()
 {
-    SDL_RenderClear(m_pRenderer);
-    SDL_RenderPresent(m_pRenderer);
+    SDL_RenderClear(m_pRenderer); //화면을 지움
+    SDL_RenderCopy(m_pRenderer, m_pTexture, &m_sourceRectangle, &m_destinationRectangle); //백버퍼에 렌더링
+    SDL_RenderPresent(m_pRenderer); //화면을 그림 -> 백버퍼를 프론트 버퍼로?
 }
 
 bool Game::running()
