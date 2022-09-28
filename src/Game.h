@@ -20,10 +20,20 @@ private:
 	bool m_bRunning;
 
 	SDL_Texture* m_pTexture;
+	SDL_Texture* m_bgTexture;
+	SDL_Texture* m_tankTexture;
 
 	// 원본 사각형
 	SDL_Rect m_sourceRectangle;
+	SDL_Rect m_bgSourceRectangle;
+	SDL_Rect m_tankSourceRectangle;
 
 	// 대상 사각형
 	SDL_Rect m_destinationRectangle;
+	SDL_Rect m_bgDestinationRectangle;
+	SDL_Rect m_tankDestinationRectangle;
+
+	//Speed 방향 제어
+	int rectDir = 1;
 };
+   
