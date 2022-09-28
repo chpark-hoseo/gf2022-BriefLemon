@@ -97,6 +97,29 @@ void Game::render()
     SDL_RenderCopy(m_pRenderer, m_bgTexture, &m_bgSourceRectangle, &m_bgDestinationRectangle);
     SDL_RenderCopy(m_pRenderer, m_tankTexture, &m_tankSourceRectangle, &m_tankDestinationRectangle);
     SDL_RenderCopy(m_pRenderer, m_pTexture, &m_sourceRectangle, &m_destinationRectangle); //백버퍼에 렌더링
+
+    /*SDL_SetRenderDrawColor(renderer, 255, 255, 255, 255);
+    SDL_RenderClear(renderer);
+
+    SDL_Rect fillRect = { SCREEN_WIDTH / 4, SCREEN_HEIGHT / 4, SCREEN_WIDTH / 2, SCREEN_HEIGHT / 2 };
+    SDL_SetRenderDrawColor(renderer, 255, 0, 0, 255);
+    SDL_RenderFillRect(renderer, &fillRect);
+
+    SDL_Rect outlineRect = { SCREEN_WIDTH / 6, SCREEN_HEIGHT / 6, SCREEN_WIDTH * 2 / 3, SCREEN_HEIGHT * 2 / 3 };
+    SDL_SetRenderDrawColor(renderer, 0, 255, 0, 255);
+    SDL_RenderDrawRect(renderer, &outlineRect);
+
+    SDL_SetRenderDrawColor(renderer, 0, 0, 255, 255);
+    SDL_RenderDrawLine(renderer, 0, SCREEN_HEIGHT / 2, SCREEN_WIDTH, SCREEN_HEIGHT / 2);
+
+    SDL_SetRenderDrawColor(renderer, 255, 255, 0, 255);
+    for (int i = 0; i < SCREEN_HEIGHT; i += 4)
+    {
+        SDL_RenderDrawPoint(renderer, SCREEN_WIDTH / 2, i);
+    }
+    
+    SDL_RenderPresent(m_pRenderer);*/
+
     SDL_RenderPresent(m_pRenderer); //화면을 그림 -> 백버퍼를 프론트 버퍼로?
 }
 
