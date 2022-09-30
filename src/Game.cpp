@@ -34,14 +34,17 @@ bool Game::init(const char* title, int xpos, int ypos, int width, int height, in
         m_sourceRectangle.x = 0;
         m_sourceRectangle.y = 0;
 
-        //대상상자의 가로, 세로 길이를 원본상자의 길이로 설정
+        //대상상자, 원본상자의 가로, 세로 길이 설정, 대상상자의 좌표 설정
+        int textW = 40, textH = 40;
+        int destextX = 80, destextY = 80;
+
         //원본,대상상자의 폭과 너비를 제한하여 일부분 화면에 렌더링
-        m_destinationRectangle.w = m_sourceRectangle.w = 40; 
-        m_destinationRectangle.h = m_sourceRectangle.h = 40;
+        m_destinationRectangle.w = m_sourceRectangle.w = textW; 
+        m_destinationRectangle.h = m_sourceRectangle.h = textH;
 
         //대상상자, 원본상자의 좌표 위치 설정
-        m_destinationRectangle.x = 0;
-        m_destinationRectangle.y = 0;
+        m_destinationRectangle.x = destextX;
+        m_destinationRectangle.y = destextY;
 
     }
     else {
