@@ -23,32 +23,21 @@ bool Game::init(const char* title, int xpos, int ypos, int width, int height, in
         }
 
         //Texture 생성
-        SDL_Surface* pTempSurface = SDL_LoadBMP("assets/rider.bmp");
+        SDL_Surface* pTempSurface = SDL_LoadBMP("assets/animate.bmp");
         m_pTexture = SDL_CreateTextureFromSurface(m_pRenderer, pTempSurface);
         SDL_FreeSurface(pTempSurface);
 
         //원본상자의 W(가로), H(세로) 길이 설정
-        SDL_QueryTexture(m_pTexture, NULL, NULL,
-            &m_sourceRectangle.w, &m_sourceRectangle.h);
-
-        //대상상자, 원본상자의 가로, 세로 길이 설정, 대상상자의 좌표 설정
-        int textW, textH;
-
-        SDL_GetWindowSize(m_pWindow, &textW, &textH);   //윈도우 창의 가로, 세로 길이를 가져옴
-        
-        int srctextX = 0, srctextY = 0;
-        int destextX = 0, destextY = 0;
+        m_sourceRectangle.w = 128;
+        m_sourceRectangle.h = 82;
 
         //대상상자, 원본상자의 좌표 위치 설정
-        m_sourceRectangle.x = srctextX;
-        m_sourceRectangle.y = srctextY;
-        
-        m_destinationRectangle.x = destextX;
-        m_destinationRectangle.y = destextY;
+        m_sourceRectangle.x = m_destinationRectangle.x = 0;
+        m_sourceRectangle.y = m_destinationRectangle.y = 0;
 
-        //원본,대상상자의 폭과 너비를 제한하여 일부분 화면에 렌더링
-        m_destinationRectangle.w = m_sourceRectangle.w = textW; 
-        m_destinationRectangle.h = m_sourceRectangle.h = textH;
+        //대상상자의 크기(w,h)를 원본상자와 동일하게 설정
+        m_destinationRectangle.w = m_sourceRectangle.w; 
+        m_destinationRectangle.h = m_sourceRectangle.h;
 
     }
     else {
