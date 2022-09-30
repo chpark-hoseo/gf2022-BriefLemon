@@ -32,9 +32,12 @@ bool Game::init(const char* title, int xpos, int ypos, int width, int height, in
             &m_sourceRectangle.w, &m_sourceRectangle.h);
 
         //대상상자, 원본상자의 가로, 세로 길이 설정, 대상상자의 좌표 설정
-        int textW = 40, textH = 40;
-        int srctextX = 50, srctextY = 50;
-        int destextX = 80, destextY = 80;
+        int textW, textH;
+
+        SDL_GetWindowSize(m_pWindow, &textW, &textH);   //윈도우 창의 가로, 세로 길이를 가져옴
+        
+        int srctextX = 0, srctextY = 0;
+        int destextX = 0, destextY = 0;
 
         //대상상자, 원본상자의 좌표 위치 설정
         m_sourceRectangle.x = srctextX;
