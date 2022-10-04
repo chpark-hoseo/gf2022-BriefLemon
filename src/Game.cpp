@@ -32,24 +32,24 @@ bool Game::init(const char* title, int xpos, int ypos, int width, int height, in
             &m_sourceRectangle.w, &m_sourceRectangle.h);
 
         //대상상자, 원본상자의 가로, 세로 길이 설정, 대상상자의 좌표 설정
-        int textW, textH;
+        //int textW, textH;
+        int textX = 0, textY = 0;
 
-        SDL_GetWindowSize(m_pWindow, &textW, &textH);   //윈도우 창의 가로, 세로 길이를 가져옴
-        
-        int srctextX = 0, srctextY = 0;
-        int destextX = 0, destextY = 0;
+        SDL_GetWindowSize(m_pWindow, &textX, &textY);   //윈도우 창의 가로, 세로 길이를 가져옴
 
         //대상상자, 원본상자의 좌표 위치 설정
-        m_sourceRectangle.x = srctextX;
-        m_sourceRectangle.y = srctextY;
+        m_sourceRectangle.x = 0;
+        m_sourceRectangle.y = 0;
+
+        m_destinationRectangle.x = 0;
+        m_destinationRectangle.y = 0;
         
-        m_destinationRectangle.x = destextX;
-        m_destinationRectangle.y = destextY;
-
         //원본,대상상자의 폭과 너비를 제한하여 일부분 화면에 렌더링
-        m_destinationRectangle.w = m_sourceRectangle.w = textW; 
-        m_destinationRectangle.h = m_sourceRectangle.h = textH;
+        m_destinationRectangle.w = m_sourceRectangle.w; 
+        m_destinationRectangle.h = m_sourceRectangle.h;
 
+        //대상상자가 회전할 지점 설정
+        rectPoint = {m_destinationRectangle.w, m_destinationRectangle.h};
     }
     else {
         return false; // SDL 초기화 실패
@@ -61,13 +61,19 @@ bool Game::init(const char* title, int xpos, int ypos, int width, int height, in
 
 void Game::update()
 {
+    //일정 주기로 그림이 회전
+    SDL_Delay(5);
+    rectAngle++;
 
+    //원 모양으로 회전이동
+    m_destinationRectangle.x = cos(rectAngle / 15) * rectRadius + 320 - m_destinationRectangle.w;
+    m_destinationRectangle.y = sin(rectAngle / 15) * rectRadius + 240 - m_destinationRectangle.h;
 }
 
 void Game::render()
 {
     SDL_RenderClear(m_pRenderer); //화면을 지움
-    SDL_RenderCopy(m_pRenderer, m_pTexture, &m_sourceRectangle, &m_destinationRectangle); //백버퍼에 렌더링
+    SDL_RenderCopyEx(m_pRenderer, m_pTexture, &m_sourceRectangle, &m_destinationRectangle, rectAngle, &rectPoint, SDL_FLIP_NONE); //백버퍼에 렌더링
     SDL_RenderPresent(m_pRenderer); //화면을 그림 -> 백버퍼를 프론트 버퍼로?
 }
 

@@ -1,5 +1,6 @@
 #pragma once //헤더파일 중복, 순환참조, 중복정의를 방지하기 위해 사용한다./
 #include <SDL2/SDL.h>
+#include <math.h>
 
 class Game
 {
@@ -29,5 +30,11 @@ private:
 
 	//Speed 방향 제어
 	int rectDir = 1;
+
+	//대상상자 관련 변수
+	SDL_Point rectPoint;
+
+	double rectAngle = 0;
+	double rectRadius = 100;
 };
    
