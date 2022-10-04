@@ -23,21 +23,34 @@ bool Game::init(const char* title, int xpos, int ypos, int width, int height, in
         }
 
         //Texture 생성
-        SDL_Surface* pTempSurface = SDL_LoadBMP("assets/animate.bmp");
+        SDL_Surface* pTempSurface = SDL_LoadBMP("assets/frogJump.bmp");
         m_pTexture = SDL_CreateTextureFromSurface(m_pRenderer, pTempSurface);
         SDL_FreeSurface(pTempSurface);
 
+        pTempSurface = SDL_LoadBMP("assets/frogJump.bmp");
+        m_pTexture2 = SDL_CreateTextureFromSurface(m_pRenderer, pTempSurface);
+        SDL_FreeSurface(pTempSurface);
+
         //원본상자의 W(가로), H(세로) 길이 설정
-        m_sourceRectangle.w = 128;
-        m_sourceRectangle.h = 82;
+        m_sourceRectangle.w = 213;
+        m_sourceRectangle.h = 104;
+
+        m_sourceRectangle2.w = 213;
+        m_sourceRectangle2.h = 104;
 
         //대상상자, 원본상자의 좌표 위치 설정
         m_sourceRectangle.x = m_destinationRectangle.x = 0;
         m_sourceRectangle.y = m_destinationRectangle.y = 0;
 
+        m_sourceRectangle2.x = m_destinationRectangle2.x = 400;
+        m_sourceRectangle2.y = m_destinationRectangle2.y = 0;
+
         //대상상자의 크기(w,h)를 원본상자와 동일하게 설정
-        m_destinationRectangle.w = m_sourceRectangle.w; 
+        m_destinationRectangle.w = m_sourceRectangle.w;
         m_destinationRectangle.h = m_sourceRectangle.h;
+
+        m_destinationRectangle2.w = m_sourceRectangle2.w;
+        m_destinationRectangle2.h = m_sourceRectangle2.h;
 
     }
     else {
@@ -50,13 +63,15 @@ bool Game::init(const char* title, int xpos, int ypos, int width, int height, in
 
 void Game::update()
 {
-    m_sourceRectangle.x = 128 * ((SDL_GetTicks() / 100) % 6);
+    m_sourceRectangle.x = 213 * ((SDL_GetTicks() / 120) % 6);
+    m_sourceRectangle2.x = 213 * ((SDL_GetTicks() / 40) % 6);
 }
 
 void Game::render()
 {
     SDL_RenderClear(m_pRenderer); //화면을 지움
-    SDL_RenderCopy(m_pRenderer, m_pTexture, &m_sourceRectangle, &m_destinationRectangle); //백버퍼에 렌더링
+    SDL_RenderCopy(m_pRenderer, m_pTexture, &m_sourceRectangle, &m_destinationRectangle);
+    SDL_RenderCopy(m_pRenderer, m_pTexture2, &m_sourceRectangle2, &m_destinationRectangle2);
     SDL_RenderPresent(m_pRenderer); //화면을 그림 -> 백버퍼를 프론트 버퍼로?
 }
 

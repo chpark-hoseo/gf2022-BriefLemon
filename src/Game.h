@@ -1,5 +1,8 @@
 #pragma once //헤더파일 중복, 순환참조, 중복정의를 방지하기 위해 사용한다./
 #include <SDL2/SDL.h>
+//#include <stdlib.h>
+//#include <time.h>
+//#include <math.h>
 
 class Game
 {
@@ -20,14 +23,13 @@ private:
 	bool m_bRunning;
 
 	SDL_Texture* m_pTexture;
+	SDL_Texture* m_pTexture2;
 
 	// 원본 사각형
 	SDL_Rect m_sourceRectangle;
+	SDL_Rect m_sourceRectangle2;
 
 	// 대상 사각형
 	SDL_Rect m_destinationRectangle;
-
-	//Speed 방향 제어
-	int rectDir = 1;
+	SDL_Rect m_destinationRectangle2;
 };
-   
