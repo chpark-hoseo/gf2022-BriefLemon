@@ -12,7 +12,7 @@ bool Game::init(const char* title, int xpos, int ypos, int width, int height, in
 
             if (m_pRenderer != 0) {
                 SDL_SetRenderDrawColor(
-                    m_pRenderer, 0, 0, 0, 255);
+                    m_pRenderer, 255, 0, 0, 255);
             }
             else {
                 return false; // 랜더러 생성 실패
@@ -23,13 +23,13 @@ bool Game::init(const char* title, int xpos, int ypos, int width, int height, in
         }
 
         //Texture 생성
-        SDL_Surface* pTempSurface = SDL_LoadBMP("assets/frogJump.bmp");
+        SDL_Surface* pTempSurface = IMG_Load("assets/animate.png");
         m_pTexture = SDL_CreateTextureFromSurface(m_pRenderer, pTempSurface);
         SDL_FreeSurface(pTempSurface);
 
         //원본상자의 W(가로), H(세로) 길이 설정
-        m_sourceRectangle.w = 213;
-        m_sourceRectangle.h = 104;
+        m_sourceRectangle.w = 128;
+        m_sourceRectangle.h = 82;
 
         //대상상자, 원본상자의 좌표 위치 설정
         m_sourceRectangle.x = m_destinationRectangle.x = 0;
@@ -50,24 +50,12 @@ bool Game::init(const char* title, int xpos, int ypos, int width, int height, in
 
 void Game::update()
 {
-    //랜덤으로 애니메이션의 속도를 조절
-    srand(time(NULL));  //랜덤 변수를 시간을 이용해 설정
-    randCount = rand() % 3 + 1;
-
-    m_sourceRectangle.x = 213 * ((SDL_GetTicks() * randCount / 100) % 6);   //스프라이트 원본상자의 좌표를 랜덤변수만큼의 배율로 조절
-
-    //원 모양으로 스프라이트 이동
-    rectAngle += 0.0001;
-
-    //스프라이트의 좌표 설정
-    m_destinationRectangle.x = cos(rectAngle) * rectRadius + 320 - m_destinationRectangle.w / 2;
-    m_destinationRectangle.y = sin(rectAngle) * rectRadius + 240 - m_destinationRectangle.h / 2;
 }
 
 void Game::render()
 {
     SDL_RenderClear(m_pRenderer); //화면을 지움
-    SDL_RenderCopyEx(m_pRenderer, m_pTexture, &m_sourceRectangle, &m_destinationRectangle, rectAngle * 60 + 90, NULL, SDL_FLIP_NONE); //스프라이트 회전
+    SDL_RenderCopy(m_pRenderer, m_pTexture, &m_sourceRectangle, &m_destinationRectangle); //스프라이트 회전
     SDL_RenderPresent(m_pRenderer); //화면을 그림 -> 백버퍼를 프론트 버퍼로?
 }
 

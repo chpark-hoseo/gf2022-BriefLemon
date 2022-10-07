@@ -1,5 +1,6 @@
 #pragma once //헤더파일 중복, 순환참조, 중복정의를 방지하기 위해 사용한다./
 #include <SDL2/SDL.h>
+#include <SDL2/SDL_image.h>
 #include <stdlib.h>
 #include <time.h>
 #include <math.h>
