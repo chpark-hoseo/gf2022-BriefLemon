@@ -23,21 +23,7 @@ bool Game::init(const char* title, int xpos, int ypos, int width, int height, in
         }
 
         //Texture 생성
-        SDL_Surface* pTempSurface = IMG_Load("assets/animate-alpha.png");
-        m_pTexture = SDL_CreateTextureFromSurface(m_pRenderer, pTempSurface);
-        SDL_FreeSurface(pTempSurface);
-
-        //원본상자의 W(가로), H(세로) 길이 설정
-        m_sourceRectangle.w = 128;
-        m_sourceRectangle.h = 82;
-
-        //대상상자, 원본상자의 좌표 위치 설정
-        m_sourceRectangle.x = m_destinationRectangle.x = 0;
-        m_sourceRectangle.y = m_destinationRectangle.y = 0;
-
-        //대상상자의 크기(w,h)를 원본상자와 동일하게 설정
-        m_destinationRectangle.w = m_sourceRectangle.w;
-        m_destinationRectangle.h = m_sourceRectangle.h;
+        m_textureManager.load("assets/animate-alpha.png", "animate", m_pRenderer);
 
     }
     else {
@@ -50,12 +36,14 @@ bool Game::init(const char* title, int xpos, int ypos, int width, int height, in
 
 void Game::update()
 {
+    m_currentFrame = ((SDL_GetTicks() / 100) % 6);
 }
 
 void Game::render()
 {
     SDL_RenderClear(m_pRenderer); //화면을 지움
-    SDL_RenderCopy(m_pRenderer, m_pTexture, &m_sourceRectangle, &m_destinationRectangle); //스프라이트 회전
+    m_textureManager.draw("animate", 0, 0, 128, 82, m_pRenderer);
+    m_textureManager.drawFrame("animate", 100, 100, 128, 82, 0, m_currentFrame, m_pRenderer);
     SDL_RenderPresent(m_pRenderer); //화면을 그림 -> 백버퍼를 프론트 버퍼로?
 }
 
@@ -87,7 +75,5 @@ void Game::clean()
     SDL_DestroyWindow(m_pWindow);
     SDL_DestroyRenderer(m_pRenderer);
 
-    //SDL_Texture 메모리에서 삭제
-    SDL_DestroyTexture(m_pTexture);
     SDL_Quit();
 }
