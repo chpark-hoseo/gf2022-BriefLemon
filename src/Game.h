@@ -21,4 +21,5 @@ private:
 
 	TextureManager m_textureManager;
 	int m_currentFrame;
+	int m_currentHeight;
 };
