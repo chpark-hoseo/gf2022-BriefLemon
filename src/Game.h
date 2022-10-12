@@ -31,10 +31,13 @@ private:
 	// 대상 사각형
 	SDL_Rect m_destinationRectangle;
 
-	//애니메이션 속도 랜덤
-	int randCount;
+	//키보드 변수
+	const Uint8* Keyboard;
 
-	//스프라이트 원 이동 함수
-	double rectAngle = 0;
-	const int rectRadius = 200;
+	//점프 관련 변수
+	bool m_jumping = false;
+	bool m_hitGround = false;
+	double m_curJump = 0.0f;
+	double m_jumpSpeed = 3.0f;
+	double m_grav = -0.02f;
 };

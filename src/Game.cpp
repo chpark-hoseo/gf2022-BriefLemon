@@ -12,7 +12,7 @@ bool Game::init(const char* title, int xpos, int ypos, int width, int height, in
 
             if (m_pRenderer != 0) {
                 SDL_SetRenderDrawColor(
-                    m_pRenderer, 255, 0, 0, 255);
+                    m_pRenderer, 0, 0, 150, 255);
             }
             else {
                 return false; // 랜더러 생성 실패
@@ -23,13 +23,13 @@ bool Game::init(const char* title, int xpos, int ypos, int width, int height, in
         }
 
         //Texture 생성
-        SDL_Surface* pTempSurface = IMG_Load("assets/animate-alpha.png");
+        SDL_Surface* pTempSurface = IMG_Load("assets/frogjump.bmp");
         m_pTexture = SDL_CreateTextureFromSurface(m_pRenderer, pTempSurface);
         SDL_FreeSurface(pTempSurface);
 
         //원본상자의 W(가로), H(세로) 길이 설정
-        m_sourceRectangle.w = 128;
-        m_sourceRectangle.h = 82;
+        m_sourceRectangle.w = 213;
+        m_sourceRectangle.h = 103;
 
         //대상상자, 원본상자의 좌표 위치 설정
         m_sourceRectangle.x = m_destinationRectangle.x = 0;
@@ -50,12 +50,15 @@ bool Game::init(const char* title, int xpos, int ypos, int width, int height, in
 
 void Game::update()
 {
+    m_destinationRectangle.y += 1;
+
+    if (m_destinationRectangle.y > 480 - m_destinationRectangle.h) { m_destinationRectangle.y = 480 - m_destinationRectangle.h;  m_hitGround = true; }
 }
 
 void Game::render()
 {
     SDL_RenderClear(m_pRenderer); //화면을 지움
-    SDL_RenderCopy(m_pRenderer, m_pTexture, &m_sourceRectangle, &m_destinationRectangle); //스프라이트 회전
+    SDL_RenderCopy(m_pRenderer, m_pTexture, &m_sourceRectangle, &m_destinationRectangle); //백버퍼에 스프라이트 그림
     SDL_RenderPresent(m_pRenderer); //화면을 그림 -> 백버퍼를 프론트 버퍼로?
 }
 
@@ -78,6 +81,47 @@ void Game::handleEvents()
             break;
         default:
             break;
+
+            case SDL_KEYDOWN:
+                switch (event.key.keysym.sym)
+                {
+                case SDLK_UP:
+                    if (m_hitGround) {
+                        m_hitGround = false;
+                        m_jumping = true;
+                        m_curJump = m_jumpSpeed;
+                    }
+                    break;
+                }
+
+                break;
+        }
+    }
+
+    SDL_PumpEvents();
+    Keyboard = SDL_GetKeyboardState(NULL);
+
+    if (Keyboard[SDL_SCANCODE_RIGHT])
+    {
+        SDL_Delay(3);
+        m_destinationRectangle.x += 1;
+    }
+    if (Keyboard[SDL_SCANCODE_LEFT])
+    {
+        SDL_Delay(3);
+        m_destinationRectangle.x -= 1;
+    }
+
+    if (m_jumping) {
+        SDL_Delay(3);
+        m_destinationRectangle.y -= m_curJump;
+        m_curJump += m_grav;
+
+        if (m_curJump > 3.0f) { m_curJump = 3.0f; }
+        if (m_curJump < -3.0f) { m_curJump = -3.0f; }
+\
+        if (m_hitGround) {
+            m_jumping = false;
         }
     }
 }
