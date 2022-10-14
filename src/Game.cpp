@@ -12,7 +12,7 @@ bool Game::init(const char* title, int xpos, int ypos, int width, int height, in
 
             if (m_pRenderer != 0) {
                 SDL_SetRenderDrawColor(
-                    m_pRenderer, 0, 170, 0, 255);
+                    m_pRenderer, 0, 0, 160, 255);
             }
             else {
                 return false; // 랜더러 생성 실패
@@ -49,9 +49,7 @@ void Game::render()
     TheTextureManager::Instance()->draw("Zelda", 0, 0, 104, 150, m_pRenderer);
 
     TheTextureManager::Instance()->drawFrame("Zelda", 100, 100, 120, 130, m_currentHeight, m_currentFrame, m_pRenderer);
-    /*m_textureManager.draw("Zelda", 0, 0, 104, 150, m_pRenderer);
-    m_textureManager.drawFrame("Zelda", 100, 100, 120, 130, m_currentHeight, m_currentFrame, m_pRenderer);*/
-    SDL_RenderPresent(m_pRenderer); //화면을 그림 -> 백버퍼를 프론트 버퍼로?
+    SDL_RenderPresent(m_pRenderer); //화면을 그림 -> 백버퍼를 프론트 버퍼로
 }
 
 bool Game::running()
@@ -81,6 +79,7 @@ void Game::clean()
 {
     SDL_DestroyWindow(m_pWindow);
     SDL_DestroyRenderer(m_pRenderer);
+    TheTextureManager::Instance()->destroyTexture("Zelda");
 
     SDL_Quit();
 }

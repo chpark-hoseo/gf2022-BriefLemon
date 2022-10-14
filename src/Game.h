@@ -19,6 +19,6 @@ private:
 	SDL_Renderer* m_pRenderer;
 	bool m_bRunning;
 
-	int m_currentFrame;
-	int m_currentHeight;
+	int m_currentFrame;		//애니메이션의 현재 프레임
+	int m_currentHeight;	//2d 스프라이트 애니메이션의 현재 열(row)
 };
