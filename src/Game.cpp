@@ -39,9 +39,8 @@ bool Game::init(const char* title, int xpos, int ypos, int width, int height, in
 
 void Game::update()
 {
-    if (m_playerY > 480 - 150) {
-        m_playerY = 480 - 150;
-        m_curFuel = m_maxFuel;
+    if (m_playerY > 720 - 150) {
+        m_playerY = 720 - 150;
         onFloor = true;
     }
 }
@@ -50,7 +49,7 @@ void Game::render()
 {
     SDL_RenderClear(m_pRenderer); //화면을 지움
 
-    SDL_Delay(3);
+    SDL_Delay(2);
     TheTextureManager::Instance()->draw("Zelda", m_playerX, m_playerY, 104, 150, m_pRenderer);
 
     SDL_RenderPresent(m_pRenderer); //화면을 그림 -> 백버퍼를 프론트 버퍼로
@@ -78,7 +77,7 @@ void Game::handleEvents()
             switch (event.key.keysym.sym)
             {
             case SDLK_SPACE:
-                isJump = true;
+                isCharge = true;
                 break;
             default:
                 break;
@@ -89,7 +88,7 @@ void Game::handleEvents()
             switch (event.key.keysym.sym)
             {
             case SDLK_SPACE:
-                isJump = false;
+                isCharge = false;
                 break;
             default:
                 break;
@@ -101,14 +100,37 @@ void Game::handleEvents()
         }
     }
 
+    if (isCharge == true && onFloor == true) {
+        if (m_curFuel <= m_maxFuel) {
+            m_curFuel++;
+        }
+    }
+    if(isCharge == false && onFloor == true) {
+        if (m_curFuel > 0) {
+            jumpHeight = -(6 + m_curFuel / 30);
+            m_curFuel = 0;
+            inJump = true;
+            onFloor = false;
+            accelerator1 = 0;
+            accelerator2 = 0;
+        }
+    }
 
-
-    if (isJump && m_curFuel > 0) {
-        m_playerY--;
-        m_curFuel--;
+    if (inJump == true) {
+        accelerator1 = accelerator1 + 0.015;
+        accelerator2 = accelerator2 + 0.015;
+        jumpHeight = jumpHeight + gravity;
+        m_playerY = m_playerY + gravity + accelerator1 + accelerator2 + jumpHeight;
+        if (jumpHeight > 0)
+        {
+            inJump = false;
+            jumpHeight = -10;
+        }
     }
     else {
-        m_playerY++;
+        accelerator1 = accelerator1 + 0.015;
+        accelerator2 = accelerator2 + 0.015;
+        m_playerY = m_playerY + gravity + accelerator1 + accelerator2;
     }
 }
 
