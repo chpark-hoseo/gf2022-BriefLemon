@@ -12,7 +12,7 @@ bool Game::init(const char* title, int xpos, int ypos, int width, int height, in
 
             if (m_pRenderer != 0) {
                 SDL_SetRenderDrawColor(
-                    m_pRenderer, 0, 0, 160, 255);
+                    m_pRenderer, 0, 0, 0, 255);
             }
             else {
                 return false; // 랜더러 생성 실패
@@ -39,7 +39,11 @@ bool Game::init(const char* title, int xpos, int ypos, int width, int height, in
 
 void Game::update()
 {
-    if (m_playerY > 480 - 150) m_playerY = 480 - 150;
+    if (m_playerY > 480 - 150) {
+        m_playerY = 480 - 150;
+        m_curFuel = m_maxFuel;
+        onFloor = true;
+    }
 }
 
 void Game::render()
@@ -99,9 +103,9 @@ void Game::handleEvents()
 
 
 
-    if (isJump) {
-        m_curFuel--;
+    if (isJump && m_curFuel > 0) {
         m_playerY--;
+        m_curFuel--;
     }
     else {
         m_playerY++;
