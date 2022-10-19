@@ -39,16 +39,16 @@ bool Game::init(const char* title, int xpos, int ypos, int width, int height, in
 
 void Game::update()
 {
-    m_currentFrame = ((SDL_GetTicks() / 100) % 10);
-    m_currentHeight = ((SDL_GetTicks() / 1500) % 8);
+    if (m_playerY > 480 - 150) m_playerY = 480 - 150;
 }
 
 void Game::render()
 {
     SDL_RenderClear(m_pRenderer); //화면을 지움
-    TheTextureManager::Instance()->draw("Zelda", 0, 0, 104, 150, m_pRenderer);
 
-    TheTextureManager::Instance()->drawFrame("Zelda", 100, 100, 120, 130, m_currentHeight, m_currentFrame, m_pRenderer);
+    SDL_Delay(3);
+    TheTextureManager::Instance()->draw("Zelda", m_playerX, m_playerY, 104, 150, m_pRenderer);
+
     SDL_RenderPresent(m_pRenderer); //화면을 그림 -> 백버퍼를 프론트 버퍼로
 }
 
@@ -69,9 +69,42 @@ void Game::handleEvents()
         case SDL_QUIT:
             m_bRunning = false;
             break;
+
+        case SDL_KEYDOWN:
+            switch (event.key.keysym.sym)
+            {
+            case SDLK_SPACE:
+                isJump = true;
+                break;
+            default:
+                break;
+            }
+            break;
+
+        case SDL_KEYUP:
+            switch (event.key.keysym.sym)
+            {
+            case SDLK_SPACE:
+                isJump = false;
+                break;
+            default:
+                break;
+            }
+            break;
+
         default:
             break;
         }
+    }
+
+
+
+    if (isJump) {
+        m_curFuel--;
+        m_playerY--;
+    }
+    else {
+        m_playerY++;
     }
 }
 
