@@ -1,6 +1,9 @@
 #pragma once //헤더파일 중복, 순환참조, 중복정의를 방지하기 위해 사용한다./
 #include "TextureManager.h"
 
+#define WINDOWWIDTH 640
+#define WINDOWHEIGHT 720
+
 class Game
 {
 public:
@@ -19,20 +22,21 @@ private:
 	SDL_Renderer* m_pRenderer;
 	bool m_bRunning;
 
-	bool onFloor = false;
-	double m_maxFuel = 500;
-	double m_curFuel = 0;
+	int m_playerX = 0;			//플레이어의 초기x좌표
+	int m_playerY = 720 - 50;	//플레이어의 초기y좌표
 
-	int m_playerX = 0;
-	int m_playerY = 0;
+	int m_playerFrame = 0;		//플레이어 현재 프레임
+	int m_playerHeight = 0;		//플레이어 2d 스프라이트 현재높이 (0 = idle. 1 = walk, 2 = charge, 3 = jump)
+	SDL_RendererFlip playerFlip = SDL_FLIP_NONE;
 
-	double gravity = 0.2;
-	double accelerator1 = 0;
-	double accelerator2 = 0;
-	bool inJump = false;
-	double jumpHeight = -10;
+	bool onFloor = false;		//바닥에 충돌중인지 체크
+	double m_maxFuel = 300;		//최대 점프 충전상태
+	double m_curFuel = 0;		//현재 점프 충전상태
+	double gravity = 0.2;		//중력값 설정
+	double accelerator1 = 0;	//가속력 설정-1
+	double accelerator2 = 0;	//가속력 설정-2
+	bool inJump = false;		//점프 하고있는 상태인지 확인
+	double jumpHeight = -6;	//기본 점프 높이 설정
 
-	bool isCharge = false;	//점프하고있는지 확인
-	int m_currentFrame;		//애니메이션의 현재 프레임
-	int m_currentHeight;	//2d 스프라이트 애니메이션의 현재 열(row)
+	bool isCharge = false;		//충전중(스페이스바 상태 확인)인지 확인
 };

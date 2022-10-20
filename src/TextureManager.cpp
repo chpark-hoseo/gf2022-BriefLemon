@@ -17,14 +17,14 @@ bool TextureManager::load(std::string fileName, std::string id, SDL_Renderer* pR
     return false;
 }
 
-void TextureManager::draw(std::string id, int x, int y, int width, int height,
+void TextureManager::draw(std::string id, int x, int y, int width, int height, int curFrame, int curHeight,
     SDL_Renderer* pRenderer, SDL_RendererFlip flip)
 {
     SDL_Rect srcRect;
     SDL_Rect destRect;
 
-    srcRect.x = 0;
-    srcRect.y = 0;
+    srcRect.x = 0 + width * curFrame;
+    srcRect.y = 0 + height * curHeight;
     srcRect.w = destRect.w = width;
     srcRect.h = destRect.h = height;
     destRect.x = x;
