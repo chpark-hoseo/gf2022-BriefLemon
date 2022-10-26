@@ -30,13 +30,13 @@ private:
 	SDL_RendererFlip playerFlip = SDL_FLIP_NONE;
 
 	bool onFloor = false;		//바닥에 충돌중인지 체크
-	double m_maxFuel = 300;		//최대 점프 충전상태
+	double m_maxFuel = 150;		//최대 점프 충전상태
 	double m_curFuel = 0;		//현재 점프 충전상태
 	double gravity = 0.2;		//중력값 설정
 	double accelerator1 = 0;	//가속력 설정-1
 	double accelerator2 = 0;	//가속력 설정-2
 	bool inJump = false;		//점프 하고있는 상태인지 확인
-	double jumpHeight = -6;	//기본 점프 높이 설정
+	double jumpHeight = -3;	//기본 점프 높이 설정
 
 	bool isCharge = false;		//충전중(스페이스바 상태 확인)인지 확인
 };

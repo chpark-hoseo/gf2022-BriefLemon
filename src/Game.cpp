@@ -23,7 +23,7 @@ bool Game::init(const char* title, int xpos, int ypos, int width, int height, in
         }
 
         //Texture 생성
-        if (!TheTextureManager::Instance()->load("assets/Player.png", "player", m_pRenderer))
+        if (!TheTextureManager::Instance()->load("assets/Player.png", "Player", m_pRenderer))
         {
             return false;
         }
@@ -38,7 +38,7 @@ bool Game::init(const char* title, int xpos, int ypos, int width, int height, in
             return false;
         }
 
-        if (!TheTextureManager::Instance()->load("assets/platform.png", "platform", m_pRenderer))
+        if (!TheTextureManager::Instance()->load("assets/platform.png", "Platform", m_pRenderer))
         {
             return false;
         }
@@ -74,9 +74,9 @@ void Game::render()
 
     TheTextureManager::Instance()->draw("BG", 0, -2020 - m_playerY * 1.5, 640, 3840, 0, 0, m_pRenderer);
     TheTextureManager::Instance()->draw("Floor", 0, 1000 - m_playerY, 640, 385, 0, 0, m_pRenderer);
-    TheTextureManager::Instance()->draw("platform", 150, 800 - m_playerY, 140, 57, 0, 0, m_pRenderer);
+    TheTextureManager::Instance()->draw("Platform", 150, 800 - m_playerY, 140, 57, 0, 0, m_pRenderer);
     SDL_Delay(3);
-    TheTextureManager::Instance()->draw("player", m_playerX, m_playerY, 32, 32, m_playerFrame, m_playerHeight, m_pRenderer,playerFlip);
+    TheTextureManager::Instance()->draw("Player", m_playerX, m_playerY, 32, 32, m_playerFrame, m_playerHeight, m_pRenderer,playerFlip);
 
     SDL_RenderPresent(m_pRenderer); //화면을 그림 -> 백버퍼를 프론트 버퍼로
 }
@@ -169,7 +169,7 @@ void Game::handleEvents()
     }
     else if(isCharge == false && onFloor == true) {     //충전상태가 끝났고 바닥에 있는 상태라면
         if (m_curFuel > 0) {
-            jumpHeight = -(6 + m_curFuel / (m_maxFuel / 10));   //점프높이에 현재 충전값의 일부를 더함
+            jumpHeight = -(3 + m_curFuel / (m_maxFuel / 10));   //점프높이에 현재 충전값의 일부를 더함
             m_curFuel = 0;                              //충전값 초기화
             inJump = true;                              //점프 상태가 된다
             onFloor = false;                            //바닥에서 떨어져있는 상태가 된다
@@ -202,7 +202,9 @@ void Game::clean()
 {
     SDL_DestroyWindow(m_pWindow);
     SDL_DestroyRenderer(m_pRenderer);
-    TheTextureManager::Instance()->destroyTexture("Zelda");
-
+    TheTextureManager::Instance()->destroyTexture("Player");
+    TheTextureManager::Instance()->destroyTexture("Floor");
+    TheTextureManager::Instance()->destroyTexture("BG");
+    TheTextureManager::Instance()->destroyTexture("Platform");
     SDL_Quit();
 }
