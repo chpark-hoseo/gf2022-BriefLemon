@@ -23,10 +23,13 @@ bool Game::init(const char* title, int xpos, int ypos, int width, int height, in
         }
 
         //Texture 생성
-        if (!TheTextureManager::Instance()->load("assets/Zelda.png", "Zelda", m_pRenderer))
+        if (!TheTextureManager::Instance()->load("assets/animate.png", "animate", m_pRenderer))
         {
             return false;
         }
+
+        m_go.load(100, 100, 128, 82, "animate");
+        m_player.load(300, 300, 128, 82, "animate");
 
     }
     else {
@@ -39,16 +42,15 @@ bool Game::init(const char* title, int xpos, int ypos, int width, int height, in
 
 void Game::update()
 {
-    m_currentFrame = ((SDL_GetTicks() / 100) % 10);
-    m_currentHeight = ((SDL_GetTicks() / 1500) % 8);
+    m_go.update();
+    m_player.update();
 }
 
 void Game::render()
 {
     SDL_RenderClear(m_pRenderer); //화면을 지움
-    TheTextureManager::Instance()->draw("Zelda", 0, 0, 104, 150, m_pRenderer);
-
-    TheTextureManager::Instance()->drawFrame("Zelda", 100, 100, 120, 130, m_currentHeight, m_currentFrame, m_pRenderer);
+    m_go.draw(m_pRenderer);
+    m_player.draw(m_pRenderer);
     SDL_RenderPresent(m_pRenderer); //화면을 그림 -> 백버퍼를 프론트 버퍼로
 }
 
