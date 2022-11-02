@@ -27,9 +27,16 @@ bool Game::init(const char* title, int xpos, int ypos, int width, int height, in
         {
             return false;
         }
+        if (!TheTextureManager::Instance()->load("assets/Dogge.png", "dogge", m_pRenderer))
+        {
+            return false;
+        }
 
         m_go.load(100, 100, 128, 82, "animate");
         m_player.load(300, 300, 128, 82, "animate");
+
+        m_monster1.load(200, 100, 128, 82, "dogge");
+        m_monster2.load(200, 300, 128, 82, "dogge");
 
     }
     else {
@@ -44,6 +51,8 @@ void Game::update()
 {
     m_go.update();
     m_player.update();
+    m_monster1.update(m_m1Spd);
+    m_monster2.update(m_m2Spd);
 }
 
 void Game::render()
@@ -51,6 +60,8 @@ void Game::render()
     SDL_RenderClear(m_pRenderer); //화면을 지움
     m_go.draw(m_pRenderer);
     m_player.draw(m_pRenderer);
+    m_monster1.draw(m_pRenderer);
+    m_monster2.draw(m_pRenderer);
     SDL_RenderPresent(m_pRenderer); //화면을 그림 -> 백버퍼를 프론트 버퍼로
 }
 
