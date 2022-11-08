@@ -3,6 +3,7 @@
 #include "GameObject.h"
 #include "Player.h"
 #include "Monster.h"
+#include <vector>
 
 class Game
 {
@@ -18,17 +19,11 @@ public:
 	void clean();
 
 private:
+	std::vector<GameObject*> m_gameObjects;
+
 	SDL_Window* m_pWindow;
 	SDL_Renderer* m_pRenderer;
 	bool m_bRunning;
-
-	GameObject m_go;
-	Player m_player;
-
-	Monster m_monster1;
-	Monster m_monster2;
-	int m_m1Spd = 1;
-	int m_m2Spd = 10;
 
 	int m_currentFrame;		//애니메이션의 현재 프레임
 	int m_currentHeight;	//2d 스프라이트 애니메이션의 현재 열(row)
