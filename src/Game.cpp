@@ -26,6 +26,11 @@ bool Game::init(const char* title, int xpos, int ypos, int width, int height, in
         GameObject* m_go = new GameObject();
         GameObject* m_player = new Player();
 
+        if (!TheTextureManager::Instance()->load("Assets/animate-alpha.png", "animate", m_pRenderer))
+        {
+            return false;
+        }
+
         m_go->load(100, 100, 128, 82, "animate");
         m_player->load(300, 300, 128, 82, "animate");
         m_gameObjects.push_back(m_go);
