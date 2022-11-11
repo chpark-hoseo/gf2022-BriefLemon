@@ -25,11 +25,6 @@ bool Game::init(const char* title, int xpos, int ypos, int width, int height, in
         }
 
         //Texture 생성
-        GameObject* m_go = new GameObject();
-        GameObject* m_player = new Player();
-        GameObject* m_monster1 = new Monster();
-        GameObject* m_monster2 = new Monster();
-
         if (!TheTextureManager::Instance()->load("assets/animate-alpha.png", "animate", m_pRenderer))
         {
             return false;
@@ -40,14 +35,8 @@ bool Game::init(const char* title, int xpos, int ypos, int width, int height, in
             return false;
         }
 
-        m_go->load(100, 100, 128, 82, "animate");
-        m_player->load(300, 300, 128, 82, "animate");
-        m_monster1->load(100, 300, 27, 31, "dogge");
-        m_monster2->load(300, 100, 27, 31, "dogge");
-        m_gameObjects.push_back(m_go);
-        m_gameObjects.push_back(m_player);
-        m_gameObjects.push_back(m_monster1);
-        m_gameObjects.push_back(m_monster2);
+        m_gameObjects.push_back(new Player(new LoaderParams(100, 100, 128, 82, "animate")));
+        m_gameObjects.push_back(new Enemy(new LoaderParams(100, 100, 128, 82, "animate")));
 
     }
     else {
@@ -71,7 +60,7 @@ void Game::render()
     SDL_RenderClear(m_pRenderer); //화면을 지움
     for (auto& go : m_gameObjects)
     {
-        go->draw(m_pRenderer);
+        go->draw();
     }
     SDL_RenderPresent(m_pRenderer); //화면을 그림 -> 백버퍼를 프론트 버퍼로
 }

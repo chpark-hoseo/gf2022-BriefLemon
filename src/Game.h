@@ -1,9 +1,9 @@
 #pragma once //헤더파일 중복, 순환참조, 중복정의를 방지하기 위해 사용한다./
-#include "TextureManager.h"
 #include "GameObject.h"
-#include "Player.h"
-#include "Monster.h"
 #include <vector>
+#include "TextureManager.h"
+#include "Player.h"
+#include "Enemy.h"
 
 class Game
 {
@@ -34,9 +34,6 @@ private:
 	SDL_Window* m_pWindow;
 	SDL_Renderer* m_pRenderer;
 	bool m_bRunning;
-
-	int m_currentFrame;		//애니메이션의 현재 프레임
-	int m_currentHeight;	//2d 스프라이트 애니메이션의 현재 열(row)
 };
 
 typedef Game TheGame;
