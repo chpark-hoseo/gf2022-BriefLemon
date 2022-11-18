@@ -1,4 +1,5 @@
 #include "Game.h"
+#include "InputHandler.h"
 
 Game* Game::s_pInstance = 0;
 
@@ -25,12 +26,12 @@ bool Game::init(const char* title, int xpos, int ypos, int width, int height, in
         }
 
         //Texture 생성
-        if (!TheTextureManager::Instance()->load("assets/player.png", "Player", m_pRenderer)) { return false; }
+        if (!TheTextureManager::Instance()->load("assets/Slime.png", "slime", m_pRenderer)) { return false; }
         if (!TheTextureManager::Instance()->load("assets/starBG.png", "BG", m_pRenderer)) { return false; }
         if (!TheTextureManager::Instance()->load("assets/Floor.png", "Floor", m_pRenderer)) { return false; }
         if (!TheTextureManager::Instance()->load("assets/platform.png", "Platform", m_pRenderer)) { return false; }
 
-        m_gameObjects.push_back(new Player(new LoaderParams(100, 100, 128, 82, "Player")));
+        m_gameObjects.push_back(new Player(new LoaderParams(100, 100, 96, 72, "slime")));
     }
     else {
         return false; // SDL 초기화 실패
@@ -72,6 +73,8 @@ bool Game::running()
 
 void Game::handleEvents()
 {
+    TheInputHandler::Instance()->update();
+
     SDL_Event event;
 
     //사용자의 특정 신호의 입력 등 언제 발생할지 모르는 조건에 대해 반복할 때는 while문을 쓰는 것이 적합하다.
@@ -88,9 +91,10 @@ void Game::handleEvents()
 
 void Game::clean()
 {
+    TheInputHandler::Instance()->clean();
     SDL_DestroyWindow(m_pWindow);
     SDL_DestroyRenderer(m_pRenderer);
-    TheTextureManager::Instance()->destroyTexture("Player");
+    TheTextureManager::Instance()->destroyTexture("slime");
     TheTextureManager::Instance()->destroyTexture("Floor");
     TheTextureManager::Instance()->destroyTexture("BG");
     TheTextureManager::Instance()->destroyTexture("Platform");
