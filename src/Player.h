@@ -1,13 +1,14 @@
 #pragma once
-#include "GameObject.h"
+#include "SDLGameObject.h"
+#include <SDL2/SDL.h>
 
-class Player : public GameObject
+class Player : public SDLGameObject
 {
 public:
-    void load(int x, int y, int width, int height, std::string textureID);
-    void draw(SDL_Renderer* pRenderer);
-    void update();
-    void clean() {};
+	Player(const LoaderParams* pParams);
+    virtual void draw();
+	virtual void update();
+	virtual void clean();
 
 	int m_playerX = 0;			//플레이어의 초기x좌표
 	int m_playerY = 720 - 50;	//플레이어의 초기y좌표

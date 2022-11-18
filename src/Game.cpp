@@ -24,19 +24,13 @@ bool Game::init(const char* title, int xpos, int ypos, int width, int height, in
             return false; // 윈도우 생성 실패
         }
 
-        GameObject* m_go = new GameObject();
-        GameObject* m_player = new Player();
-
         //Texture 생성
         if (!TheTextureManager::Instance()->load("assets/player.png", "Player", m_pRenderer)) { return false; }
         if (!TheTextureManager::Instance()->load("assets/starBG.png", "BG", m_pRenderer)) { return false; }
         if (!TheTextureManager::Instance()->load("assets/Floor.png", "Floor", m_pRenderer)) { return false; }
         if (!TheTextureManager::Instance()->load("assets/platform.png", "Platform", m_pRenderer)) { return false; }
 
-        m_go->load(100, 100, 128, 82, "Player");
-        m_player->load(300, 300, 128, 82, "Player");
-        m_gameObjects.push_back(m_go);
-        m_gameObjects.push_back(m_player);
+        m_gameObjects.push_back(new Player(new LoaderParams(100, 100, 128, 82, "Player")));
     }
     else {
         return false; // SDL 초기화 실패
@@ -65,7 +59,7 @@ void Game::render()
     TheTextureManager::Instance()->draw("Player", m_playerX, m_playerY, 32, 32, m_playerFrame, m_playerHeight, m_pRenderer,playerFlip);*/
     for (auto& go : m_gameObjects)
     {
-        go->draw(m_pRenderer);
+        go->draw();
     }
 
     SDL_RenderPresent(m_pRenderer); //화면을 그림 -> 백버퍼를 프론트 버퍼로
