@@ -1,4 +1,4 @@
-#include "Vector2D.h"\
+#include "Vector2D.h"
 
 Vector2D Vector2D::operator+(const Vector2D& v2) const
 {
