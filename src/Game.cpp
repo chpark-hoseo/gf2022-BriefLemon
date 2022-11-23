@@ -1,4 +1,5 @@
 #include "Game.h"
+#include "InputHandler.h"
 
 Game* Game::s_pInstance = 0;
 
@@ -73,6 +74,7 @@ bool Game::running()
 void Game::handleEvents()
 {
     SDL_Event event;
+    TheInputHandler::Instance()->update();
 
     //사용자의 특정 신호의 입력 등 언제 발생할지 모르는 조건에 대해 반복할 때는 while문을 쓰는 것이 적합하다.
     while (SDL_PollEvent(&event))
@@ -93,6 +95,7 @@ void Game::clean()
     SDL_DestroyWindow(m_pWindow);
     SDL_DestroyRenderer(m_pRenderer);
     TheTextureManager::Instance()->destroyTexture("animate");
+    TheInputHandler::Instance()->clean();
 
     SDL_Quit();
 }
