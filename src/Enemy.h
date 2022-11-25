@@ -7,5 +7,6 @@ public:
     Enemy(const LoaderParams* pParams);
     virtual void draw();
     virtual void update();
+    void handleInput();
     virtual void clean();
 };
