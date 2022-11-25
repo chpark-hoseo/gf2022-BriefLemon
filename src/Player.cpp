@@ -6,12 +6,14 @@ Player::Player(const LoaderParams* pParams) : SDLGameObject(pParams) {}
 void Player::draw()
 {
     SDLGameObject::draw();
+    m_currentFrame = m_playerFrame;
 }
 
 void Player::update()
 {
     handleInput();
     SDLGameObject::update();
+
     /*if (m_playerHeight > 1) {
         m_playerFrame = 0;
     }
@@ -136,11 +138,16 @@ void Player::update()
 void Player::handleInput() {
     if (TheInputHandler::Instance()->isKeyDown(SDL_SCANCODE_RIGHT)) {
         m_velocity.setX(2);
+        m_playerFrame = (SDL_GetTicks() / 150 % 4);
+        m_flip = SDL_FLIP_HORIZONTAL;
     }
     else if (TheInputHandler::Instance()->isKeyDown(SDL_SCANCODE_LEFT)) {
         m_velocity.setX(-2);
+        m_playerFrame = (SDL_GetTicks() / 150 % 4);
+        m_flip = SDL_FLIP_NONE;
     }
     else {
+        m_playerFrame = 0;
         m_velocity.setX(0);
     }
 

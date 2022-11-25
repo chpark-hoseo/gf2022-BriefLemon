@@ -31,7 +31,7 @@ bool Game::init(const char* title, int xpos, int ypos, int width, int height, in
         if (!TheTextureManager::Instance()->load("assets/Floor.png", "Floor", m_pRenderer)) { return false; }
         if (!TheTextureManager::Instance()->load("assets/platform.png", "Platform", m_pRenderer)) { return false; }
 
-        m_gameObjects.push_back(new Player(new LoaderParams(100, 100, 96, 72, "slime")));
+        m_gameObjects.push_back(new Player(new LoaderParams(100, 100, 96, 72, "slime", 0, 0, SDL_FLIP_NONE)));
     }
     else {
         return false; // SDL 초기화 실패
