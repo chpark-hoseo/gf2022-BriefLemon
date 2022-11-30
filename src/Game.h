@@ -1,11 +1,7 @@
 #pragma once //헤더파일 중복, 순환참조, 중복정의를 방지하기 위해 사용한다./
 #include "TextureManager.h"
 #include "GameObject.h"
-#include "Player.h"
 #include <vector>
-
-#define WINDOWWIDTH 640
-#define WINDOWHEIGHT 720
 
 class Game
 {

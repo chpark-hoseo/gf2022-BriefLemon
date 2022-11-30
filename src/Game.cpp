@@ -1,4 +1,6 @@
 #include "Game.h"
+#include "Player.h"
+#include "Tile.h"
 #include "InputHandler.h"
 
 Game* Game::s_pInstance = 0;
@@ -29,9 +31,10 @@ bool Game::init(const char* title, int xpos, int ypos, int width, int height, in
         if (!TheTextureManager::Instance()->load("assets/Slime.png", "slime", m_pRenderer)) { return false; }
         if (!TheTextureManager::Instance()->load("assets/starBG.png", "BG", m_pRenderer)) { return false; }
         if (!TheTextureManager::Instance()->load("assets/Floor.png", "Floor", m_pRenderer)) { return false; }
-        if (!TheTextureManager::Instance()->load("assets/platform.png", "Platform", m_pRenderer)) { return false; }
+        if (!TheTextureManager::Instance()->load("assets/platform.png", "Tile", m_pRenderer)) { return false; }
 
         m_gameObjects.push_back(new Player(new LoaderParams(100, 600, 96, 72, "slime", 0, 0, SDL_FLIP_NONE)));
+        m_gameObjects.push_back(new Tile(new LoaderParams(300, 200, 140, 57, "Tile", 0, 0, SDL_FLIP_NONE)));
     }
     else {
         return false; // SDL 초기화 실패
@@ -53,11 +56,6 @@ void Game::render()
 {
     SDL_RenderClear(m_pRenderer); //화면을 지움
 
-    /*TheTextureManager::Instance()->draw("BG", 0, -2020 - m_playerY * 1.5, 640, 3840, 0, 0, m_pRenderer);
-    TheTextureManager::Instance()->draw("Floor", 0, 1000 - m_playerY, 640, 385, 0, 0, m_pRenderer);
-    TheTextureManager::Instance()->draw("Platform", 150, 800 - m_playerY, 140, 57, 0, 0, m_pRenderer);
-    SDL_Delay(3);
-    TheTextureManager::Instance()->draw("Player", m_playerX, m_playerY, 32, 32, m_playerFrame, m_playerHeight, m_pRenderer,playerFlip);*/
     for (auto& go : m_gameObjects)
     {
         go->draw();
