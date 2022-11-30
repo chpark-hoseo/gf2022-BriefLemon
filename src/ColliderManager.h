@@ -21,7 +21,7 @@ private:
 	Player* m_player;
 	Tile* m_tile;
 
-	int pX, pY;
-	int tX, tY;
+	int pX, pY, pW, pH;
+	int tX, tY, tW, tH;
 
 }typedef TheCollider;

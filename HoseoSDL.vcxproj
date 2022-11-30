@@ -153,16 +153,16 @@
     <ClCompile Include="src\Vector2D.cpp" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="Include\ColliderManager.h" />
-    <ClInclude Include="Include\Game.h" />
-    <ClInclude Include="Include\GameObject.h" />
+    <ClInclude Include="src\ColliderManager.h" />
+    <ClInclude Include="src\Game.h" />
+    <ClInclude Include="src\GameObject.h" />
     <ClInclude Include="src\InputHandler.h" />
-    <ClInclude Include="Include\LoaderParams.h" />
-    <ClInclude Include="Include\Player.h" />
-    <ClInclude Include="Include\SDLGameObject.h" />
-    <ClInclude Include="Include\TextureManager.h" />
-    <ClInclude Include="Include\Tile.h" />
-    <ClInclude Include="Include\Vector2D.h" />
+    <ClInclude Include="src\LoaderParams.h" />
+    <ClInclude Include="src\Player.h" />
+    <ClInclude Include="src\SDLGameObject.h" />
+    <ClInclude Include="src\TextureManager.h" />
+    <ClInclude Include="src\Tile.h" />
+    <ClInclude Include="src\Vector2D.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

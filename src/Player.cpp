@@ -10,6 +10,12 @@ int Player::getXpos() {
 int Player::getYpos() {
     return m_position.getY();
 }
+int Player::getWidth() {
+    return m_width;
+}
+int Player::getHeight() {
+    return m_height;
+}
 
 void Player::draw()
 {
@@ -23,12 +29,16 @@ void Player::update()
     handleInput();
     SDLGameObject::update();
 
-    m_velocity.setY(m_gravity + jumpHeight);
-    m_acceleration.setY(m_accelerator);
+    if (!onFloor) {
+        m_velocity.setY(m_gravity + jumpHeight);
+        m_acceleration.setY(m_accelerator);
+    }
+    else {
+        m_velocity.setY(0);
+    }
 
     if (m_position.getY() > 720 - 72) {
         m_position.setY(720 - 72);
-        m_velocity.setY(0);
         onFloor = true;
     }
 
@@ -104,15 +114,18 @@ void Player::jump() {
         else if (TheInputHandler::Instance()->isKeyDown(SDL_SCANCODE_LEFT)) m_velocity.setX(-m_curFuel / 15);
         else m_velocity.setX(0);
 
-        jumpHeight -= m_curFuel / (m_maxFuel / 15);   //점프높이에 현재 충전값의 일부를 더함
+        jumpHeight -= m_curFuel / (m_maxFuel / 20);   //점프높이에 현재 충전값의 일부를 더함
         isJump = true;                              //점프 상태가 된다
         onFloor = false;                            //바닥에서 떨어져있는 상태가 된다
         m_accelerator = 0.0f;                          //가속도 초기화
     }
 }
 
-bool AABB() {
-    return true;
+void Player::platformCheck(int tY) {
+    isJump = false;
+    onFloor = true;
+    m_accelerator = 0.0f;
+    if (m_position.getY() + m_height > tY) m_position.setY(tY);
 }
 
 void Player::clean() {}

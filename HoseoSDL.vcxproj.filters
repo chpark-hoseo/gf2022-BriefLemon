@@ -44,34 +44,34 @@
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="Include\Game.h">
+    <ClInclude Include="src\Game.h">
       <Filter>헤더 파일</Filter>
     </ClInclude>
-    <ClInclude Include="Include\TextureManager.h">
+    <ClInclude Include="src\TextureManager.h">
       <Filter>헤더 파일</Filter>
     </ClInclude>
-    <ClInclude Include="Include\GameObject.h">
+    <ClInclude Include="src\GameObject.h">
       <Filter>헤더 파일</Filter>
     </ClInclude>
-    <ClInclude Include="Include\Player.h">
+    <ClInclude Include="src\Player.h">
       <Filter>헤더 파일</Filter>
     </ClInclude>
-    <ClInclude Include="Include\LoaderParams.h">
+    <ClInclude Include="src\LoaderParams.h">
       <Filter>헤더 파일</Filter>
     </ClInclude>
-    <ClInclude Include="Include\SDLGameObject.h">
+    <ClInclude Include="src\SDLGameObject.h">
       <Filter>헤더 파일</Filter>
     </ClInclude>
-    <ClInclude Include="Include\Vector2D.h">
+    <ClInclude Include="src\Vector2D.h">
       <Filter>헤더 파일</Filter>
     </ClInclude>
     <ClInclude Include="src\InputHandler.h">
       <Filter>헤더 파일</Filter>
     </ClInclude>
-    <ClInclude Include="Include\Tile.h">
+    <ClInclude Include="src\Tile.h">
       <Filter>헤더 파일</Filter>
     </ClInclude>
-    <ClInclude Include="Include\ColliderManager.h">
+    <ClInclude Include="src\ColliderManager.h">
       <Filter>헤더 파일</Filter>
     </ClInclude>
   </ItemGroup>

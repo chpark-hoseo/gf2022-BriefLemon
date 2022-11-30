@@ -13,6 +13,10 @@ public:
 
 	int getXpos();
 	int getYpos();
+	int getWidth();
+	int getHeight();
+
+	void platformCheck(int tY);
 
 private:
 	void jump();
@@ -31,5 +35,4 @@ private:
 
 	bool isJump = false;		//점프 하고있는 상태인지 확인
 	bool onFloor = false;		//바닥에 충돌중인지 체크
-	bool isCharge = false;		//충전중(스페이스바 상태 확인)인지 확인
 };

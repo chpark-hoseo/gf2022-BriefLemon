@@ -14,4 +14,6 @@ public:
 
 	int getXpos();
 	int getYpos();
+	int getWidth();
+	int getHeight();
 };

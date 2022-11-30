@@ -9,6 +9,12 @@ int Tile::getXpos() {
 int Tile::getYpos() {
     return m_position.getY();
 }
+int Tile::getWidth() {
+    return m_width;
+}
+int Tile::getHeight() {
+    return m_height;
+}
 
 void Tile::draw()
 {
