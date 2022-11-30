@@ -1,5 +1,6 @@
 #include "Player.h"
 #include "InputHandler.h"
+#include <iostream>
 
 Player::Player(const LoaderParams* pParams) : SDLGameObject(pParams) {}
 
@@ -7,12 +8,14 @@ void Player::draw()
 {
     SDLGameObject::draw();
     m_currentFrame = m_playerFrame;
+    m_currentRow = m_playerRow;
 }
 
 void Player::update()
 {
     handleInput();
     SDLGameObject::update();
+    std::cout << m_curFuel << std::endl;
 
     /*if (m_playerHeight > 1) {
         m_playerFrame = 0;
@@ -136,6 +139,8 @@ void Player::update()
 }
 
 void Player::handleInput() {
+
+    //좌우 이동
     if (TheInputHandler::Instance()->isKeyDown(SDL_SCANCODE_RIGHT)) {
         m_velocity.setX(2);
         m_playerFrame = (SDL_GetTicks() / 150 % 4);
@@ -151,7 +156,21 @@ void Player::handleInput() {
         m_velocity.setX(0);
     }
 
-    if (TheInputHandler::Instance()->isKeyDown(SDL_SCANCODE_UP)) {
+    if (TheInputHandler::Instance()->isKeyDown(SDL_SCANCODE_SPACE)) {
+        m_playerRow = 1;
+        m_playerFrame = (SDL_GetTicks() / 150 % 2);
+        m_velocity.setX(0);
+
+        if (m_curFuel < m_maxFuel) {
+            m_curFuel++;
+        }
+    }
+    else {
+        jump();
+    }
+
+    //상하 이동
+    /*if (TheInputHandler::Instance()->isKeyDown(SDL_SCANCODE_UP)) {
         m_velocity.setY(-2);
     }
     else if (TheInputHandler::Instance()->isKeyDown(SDL_SCANCODE_DOWN)) {
@@ -159,7 +178,14 @@ void Player::handleInput() {
     }
     else {
         m_velocity.setY(0);
-    }
+    }*/
+
+
+}
+
+void Player::jump() {
+    m_playerRow = 0;
+    m_curFuel = 0;
 }
 
 void Player::clean() {}
