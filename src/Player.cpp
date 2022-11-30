@@ -4,6 +4,13 @@
 
 Player::Player(const LoaderParams* pParams) : SDLGameObject(pParams) {}
 
+int Player::getXpos() {
+    return m_position.getX();
+}
+int Player::getYpos() {
+    return m_position.getY();
+}
+
 void Player::draw()
 {
     SDLGameObject::draw();
@@ -15,7 +22,7 @@ void Player::update()
 {
     handleInput();
     SDLGameObject::update();
-    std::cout << m_curFuel << std::endl;
+
     m_velocity.setY(m_gravity + jumpHeight);
     m_acceleration.setY(m_accelerator);
 
@@ -29,14 +36,25 @@ void Player::update()
             m_accelerator = m_accelerator + 0.2;            //가속도 상승
             jumpHeight = jumpHeight + m_gravity;            //점프높이 계속 감소
             onFloor = false;
+
+            if (m_position.getX() < 0) {
+                m_velocity.setX(-m_velocity.getX());
+            }
+            if (m_position.getX() > 640 - m_width) {
+                m_velocity.setX(-m_velocity.getX());
+            }
+
             if (jumpHeight > 0)
             {
                 isJump = false;                             //점프상태 해제
+                m_curFuel = 0;                              //충전값 초기화
                 jumpHeight = -6;
             }
         }
     else {
         m_accelerator = m_accelerator + 0.2;
+        if (m_position.getX() < 0) m_position.setX(0);
+        if (m_position.getX() > 640 - m_width) m_position.setX(640 - m_width);
     }
 }
 
@@ -82,8 +100,11 @@ void Player::handleInput() {
 
 void Player::jump() {
     if (m_curFuel > 0 && onFloor) {
+        if (TheInputHandler::Instance()->isKeyDown(SDL_SCANCODE_RIGHT)) m_velocity.setX(m_curFuel / 15);
+        else if (TheInputHandler::Instance()->isKeyDown(SDL_SCANCODE_LEFT)) m_velocity.setX(-m_curFuel / 15);
+        else m_velocity.setX(0);
+
         jumpHeight -= m_curFuel / (m_maxFuel / 15);   //점프높이에 현재 충전값의 일부를 더함
-        m_curFuel = 0;                              //충전값 초기화
         isJump = true;                              //점프 상태가 된다
         onFloor = false;                            //바닥에서 떨어져있는 상태가 된다
         m_accelerator = 0.0f;                          //가속도 초기화
@@ -91,7 +112,7 @@ void Player::jump() {
 }
 
 bool AABB() {
-    
+    return true;
 }
 
 void Player::clean() {}

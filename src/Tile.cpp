@@ -3,6 +3,13 @@
 
 Tile::Tile(const LoaderParams* pParams) : SDLGameObject(pParams) {}
 
+int Tile::getXpos() {
+    return m_position.getX();
+}
+int Tile::getYpos() {
+    return m_position.getY();
+}
+
 void Tile::draw()
 {
     SDLGameObject::draw();

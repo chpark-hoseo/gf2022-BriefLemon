@@ -11,8 +11,10 @@ public:
 	virtual void clean();
 	void handleInput();
 
-	bool AABB();
+	int getXpos();
+	int getYpos();
 
+private:
 	void jump();
 
 	int m_playerRow = 0;		//플레이어 2d 스프라이트 현재높이 (0 = idle. 1 = walk, 2 = charge, 3 = jump)

@@ -1,6 +1,7 @@
 #include "Game.h"
 #include "Player.h"
 #include "Tile.h"
+#include "ColliderManager.h"
 #include "InputHandler.h"
 
 Game* Game::s_pInstance = 0;
@@ -27,14 +28,19 @@ bool Game::init(const char* title, int xpos, int ypos, int width, int height, in
             return false; // 윈도우 생성 실패
         }
 
+        Player* player = new Player(new LoaderParams(100, 600, 96, 72, "slime", 0, 0, SDL_FLIP_NONE));
+        Tile* tile = new Tile(new LoaderParams(300, 200, 140, 57, "Tile", 0, 0, SDL_FLIP_NONE));
+
         //Texture 생성
         if (!TheTextureManager::Instance()->load("assets/Slime.png", "slime", m_pRenderer)) { return false; }
         if (!TheTextureManager::Instance()->load("assets/starBG.png", "BG", m_pRenderer)) { return false; }
         if (!TheTextureManager::Instance()->load("assets/Floor.png", "Floor", m_pRenderer)) { return false; }
         if (!TheTextureManager::Instance()->load("assets/platform.png", "Tile", m_pRenderer)) { return false; }
 
-        m_gameObjects.push_back(new Player(new LoaderParams(100, 600, 96, 72, "slime", 0, 0, SDL_FLIP_NONE)));
-        m_gameObjects.push_back(new Tile(new LoaderParams(300, 200, 140, 57, "Tile", 0, 0, SDL_FLIP_NONE)));
+        TheCollider::instance()->setGameObject(player, tile);
+
+        m_gameObjects.push_back(player);
+        m_gameObjects.push_back(tile);
     }
     else {
         return false; // SDL 초기화 실패
@@ -50,6 +56,8 @@ void Game::update()
     {
         go->update();
     }
+
+    TheCollider::instance()->update();
 }
 
 void Game::render()
