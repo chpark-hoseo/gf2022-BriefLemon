@@ -29,22 +29,27 @@ void Player::update()
     handleInput();
     SDLGameObject::update();
 
-    if (!onFloor) {
-        m_velocity.setY(m_gravity + jumpHeight);
-        m_acceleration.setY(m_accelerator);
+    if (onFloor) {
+        m_velocity.setY(0);
+        jumpHeight = 0;
+        isJump = false;
     }
     else {
-        m_velocity.setY(0);
+        m_currentRow = 2;
+        m_currentFrame = 0;
+        m_velocity.setY(jumpHeight);
+        m_acceleration.setY(m_accelerator);
     }
 
-    if (m_position.getY() > 720 - 72) {
-        m_position.setY(720 - 72);
+    if (m_position.getY() > 2304 - m_height) {
+        m_position.setY(2304 - m_height);
         onFloor = true;
     }
 
     if (isJump == true) {                                   //점프 상태일 경우
             m_accelerator = m_accelerator + 0.2;            //가속도 상승
             jumpHeight = jumpHeight + m_gravity;            //점프높이 계속 감소
+            m_curFuel = 0;                                  //충전값 초기화
             onFloor = false;
 
             if (m_position.getX() < 0) {
@@ -57,8 +62,6 @@ void Player::update()
             if (jumpHeight > 0)
             {
                 isJump = false;                             //점프상태 해제
-                m_curFuel = 0;                              //충전값 초기화
-                jumpHeight = -6;
             }
         }
     else {
@@ -87,7 +90,8 @@ void Player::handleInput() {
             m_velocity.setX(-4);
         }
         else {
-            m_playerFrame = 0;
+            m_playerRow = 0;
+            m_playerFrame = 3;
 
             m_velocity.setX(0);
         }
@@ -114,7 +118,7 @@ void Player::jump() {
         else if (TheInputHandler::Instance()->isKeyDown(SDL_SCANCODE_LEFT)) m_velocity.setX(-m_curFuel / 15);
         else m_velocity.setX(0);
 
-        jumpHeight -= m_curFuel / (m_maxFuel / 20);   //점프높이에 현재 충전값의 일부를 더함
+        jumpHeight -= 6 + m_curFuel / (m_maxFuel / 15);   //점프높이에 현재 충전값의 일부를 더함
         isJump = true;                              //점프 상태가 된다
         onFloor = false;                            //바닥에서 떨어져있는 상태가 된다
         m_accelerator = 0.0f;                          //가속도 초기화
@@ -122,10 +126,10 @@ void Player::jump() {
 }
 
 void Player::platformCheck(int tY) {
-    isJump = false;
-    onFloor = true;
-    m_accelerator = 0.0f;
-    if (m_position.getY() + m_height > tY) m_position.setY(tY);
+    if (m_position.getY() > tY - m_height + 15) {
+        m_position.setY(tY - m_height + 15);
+        onFloor = true;
+    }
 }
 
 void Player::clean() {}

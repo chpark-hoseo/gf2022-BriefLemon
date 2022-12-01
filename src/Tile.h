@@ -11,9 +11,12 @@ public:
 	virtual void update();
 	virtual void clean();
 	void handleInput() {};
+	void init(int ranX, int ranY);
 
 	int getXpos();
 	int getYpos();
 	int getWidth();
 	int getHeight();
+
+private:
 };

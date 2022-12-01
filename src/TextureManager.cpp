@@ -36,6 +36,8 @@ void TextureManager::draw(std::string id, int x, int y, int width, int height, i
 void TextureManager::drawFrame(std::string id, int x, int y, int width, int height, int currentRow, int currentFrame,
     SDL_Renderer* pRenderer, SDL_RendererFlip flip)
 {
+    int playerY = m_player->getYpos();
+
     SDL_Rect srcRect;
     SDL_Rect destRect;
 
@@ -44,13 +46,17 @@ void TextureManager::drawFrame(std::string id, int x, int y, int width, int heig
     srcRect.w = destRect.w = width;
     srcRect.h = destRect.h = height;
     destRect.x = x;
-    destRect.y = y;
+    destRect.y = y - 768 * floorf((playerY) / 768);
 
     SDL_RenderCopyEx(pRenderer, m_textureMap[id], &srcRect, &destRect, 0, 0, flip);
 }
 
 void TextureManager::destroyTexture(std::string id) {
     SDL_DestroyTexture(m_textureMap[id]);
+}
+
+void TextureManager::getGameObject(Player* player) {
+    this->m_player = player;
 }
 
 TextureManager* TextureManager::s_pInstance = 0;

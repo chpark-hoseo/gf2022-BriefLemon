@@ -24,6 +24,8 @@ public:
 	friend Vector2D& operator+=(Vector2D& v1, const Vector2D& v2);
 	friend Vector2D& operator-=(Vector2D& v1, const Vector2D& v2);
 
+	Vector2D Vector2DScale(Vector2D v1, float scale);
+
 private:
 	float m_x;
 	float m_y;

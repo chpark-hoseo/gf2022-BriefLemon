@@ -1,5 +1,7 @@
 #include "Tile.h"
 #include "InputHandler.h"
+#include <cstdlib>
+#include <ctime>
 
 Tile::Tile(const LoaderParams* pParams) : SDLGameObject(pParams) {}
 
@@ -16,6 +18,11 @@ int Tile::getHeight() {
     return m_height;
 }
 
+void Tile::init(int ranX, int ranY) {
+    m_position.setX(ranX);
+    m_position.setY(ranY);
+}
+
 void Tile::draw()
 {
     SDLGameObject::draw();
@@ -23,8 +30,7 @@ void Tile::draw()
 
 void Tile::update()
 {
-    handleInput();
-    SDLGameObject::update();
+    
 }
 
 void Tile::clean() {}

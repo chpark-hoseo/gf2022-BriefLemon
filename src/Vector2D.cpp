@@ -56,3 +56,9 @@ Vector2D& operator-=(Vector2D& v1, const Vector2D& v2)
 	v1.m_y -= v2.m_y;
 	return v1;
 }
+
+Vector2D Vector2D::Vector2DScale(Vector2D v1, float scale) {
+	Vector2D result = { v1.m_x * scale, v1.m_y * scale };
+
+	return result;
+}

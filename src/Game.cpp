@@ -1,7 +1,6 @@
 #include "Game.h"
 #include "Player.h"
-#include "Tile.h"
-#include "ColliderManager.h"
+#include "TileSpawner.h"
 #include "InputHandler.h"
 
 Game* Game::s_pInstance = 0;
@@ -28,19 +27,66 @@ bool Game::init(const char* title, int xpos, int ypos, int width, int height, in
             return false; // 윈도우 생성 실패
         }
 
-        Player* player = new Player(new LoaderParams(100, 600, 96, 72, "slime", 0, 0, SDL_FLIP_NONE));
-        Tile* tile = new Tile(new LoaderParams(300, 200, 140, 57, "Tile", 0, 0, SDL_FLIP_NONE));
-
         //Texture 생성
         if (!TheTextureManager::Instance()->load("assets/Slime.png", "slime", m_pRenderer)) { return false; }
         if (!TheTextureManager::Instance()->load("assets/starBG.png", "BG", m_pRenderer)) { return false; }
         if (!TheTextureManager::Instance()->load("assets/Floor.png", "Floor", m_pRenderer)) { return false; }
         if (!TheTextureManager::Instance()->load("assets/platform.png", "Tile", m_pRenderer)) { return false; }
 
-        TheCollider::instance()->setGameObject(player, tile);
+        Player* player = new Player(new LoaderParams(100, 2304, 96, 72, "slime", 0, 0, SDL_FLIP_NONE));
+
+        Tile* tile = new Tile(new LoaderParams(300, 2004, 100, 50, "Tile", 0, 0, SDL_FLIP_NONE));
+        Tile* tile2 = new Tile(new LoaderParams(300, 2004, 100, 50, "Tile", 0, 0, SDL_FLIP_NONE));
+        Tile* tile3 = new Tile(new LoaderParams(300, 2004, 100, 50, "Tile", 0, 0, SDL_FLIP_NONE));
+        Tile* tile4 = new Tile(new LoaderParams(300, 2004, 100, 50, "Tile", 0, 0, SDL_FLIP_NONE));
+        Tile* tile5 = new Tile(new LoaderParams(300, 2004, 100, 50, "Tile", 0, 0, SDL_FLIP_NONE));
+        Tile* tile6 = new Tile(new LoaderParams(300, 2004, 100, 50, "Tile", 0, 0, SDL_FLIP_NONE));
+        Tile* tile7 = new Tile(new LoaderParams(300, 2004, 100, 50, "Tile", 0, 0, SDL_FLIP_NONE));
+        Tile* tile8 = new Tile(new LoaderParams(300, 2004, 100, 50, "Tile", 0, 0, SDL_FLIP_NONE));
+        Tile* tile9 = new Tile(new LoaderParams(300, 2004, 100, 50, "Tile", 0, 0, SDL_FLIP_NONE));
+        Tile* tile10 = new Tile(new LoaderParams(300, 2004, 100, 50, "Tile", 0, 0, SDL_FLIP_NONE));
+        Tile* tile11 = new Tile(new LoaderParams(300, 2004, 100, 50, "Tile", 0, 0, SDL_FLIP_NONE));
+        Tile* tile12 = new Tile(new LoaderParams(300, 2004, 100, 50, "Tile", 0, 0, SDL_FLIP_NONE));
+        Tile* tile13 = new Tile(new LoaderParams(300, 2004, 100, 50, "Tile", 0, 0, SDL_FLIP_NONE));
+        Tile* tile14 = new Tile(new LoaderParams(300, 2004, 100, 50, "Tile", 0, 0, SDL_FLIP_NONE));
+        Tile* tile15 = new Tile(new LoaderParams(300, 2004, 100, 50, "Tile", 0, 0, SDL_FLIP_NONE));
+        Tile* tile16 = new Tile(new LoaderParams(300, 2004, 100, 50, "Tile", 0, 0, SDL_FLIP_NONE));
+        Tile* tile17 = new Tile(new LoaderParams(300, 2004, 100, 50, "Tile", 0, 0, SDL_FLIP_NONE));
+        Tile* tile18 = new Tile(new LoaderParams(300, 2004, 100, 50, "Tile", 0, 0, SDL_FLIP_NONE));
+        Tile* tile19 = new Tile(new LoaderParams(300, 2004, 100, 50, "Tile", 0, 0, SDL_FLIP_NONE));
+        Tile* tile20 = new Tile(new LoaderParams(300, 2004, 100, 50, "Tile", 0, 0, SDL_FLIP_NONE));
+
+        TheTextureManager::Instance()->getGameObject(player);
+
+        TileSpawner::Instance()->setGameObject(player);
+
+        TileSpawner::Instance()->m_Tiles.push_back(tile);
+        TileSpawner::Instance()->m_Tiles.push_back(tile2);
+        TileSpawner::Instance()->m_Tiles.push_back(tile3);
+        TileSpawner::Instance()->m_Tiles.push_back(tile4);
+        TileSpawner::Instance()->m_Tiles.push_back(tile5);
+        TileSpawner::Instance()->m_Tiles.push_back(tile6);
+        TileSpawner::Instance()->m_Tiles.push_back(tile7);
+        TileSpawner::Instance()->m_Tiles.push_back(tile8);
+        TileSpawner::Instance()->m_Tiles.push_back(tile9);
+        TileSpawner::Instance()->m_Tiles.push_back(tile10);
+        TileSpawner::Instance()->m_Tiles.push_back(tile11);
+        TileSpawner::Instance()->m_Tiles.push_back(tile12);
+        TileSpawner::Instance()->m_Tiles.push_back(tile13);
+        TileSpawner::Instance()->m_Tiles.push_back(tile14);
+        TileSpawner::Instance()->m_Tiles.push_back(tile15);
+        TileSpawner::Instance()->m_Tiles.push_back(tile16);
+        TileSpawner::Instance()->m_Tiles.push_back(tile17);
+        TileSpawner::Instance()->m_Tiles.push_back(tile18);
+        TileSpawner::Instance()->m_Tiles.push_back(tile19);
+        TileSpawner::Instance()->m_Tiles.push_back(tile20);
+        TileSpawner::Instance()->init();
+
+        
 
         m_gameObjects.push_back(player);
-        m_gameObjects.push_back(tile);
+        //m_gameObjects.push_back(tile);
+        //m_gameObjects.push_back(tile2);
     }
     else {
         return false; // SDL 초기화 실패
@@ -57,17 +103,23 @@ void Game::update()
         go->update();
     }
 
-    TheCollider::instance()->update();
+    TileSpawner::Instance()->update();
 }
 
 void Game::render()
 {
     SDL_RenderClear(m_pRenderer); //화면을 지움
 
+    TheTextureManager::Instance()->drawFrame("BG", 0, 0, 640, 2304, 0, 0, m_pRenderer);
+    TheTextureManager::Instance()->drawFrame("Floor", 0, 1921, 640, 383, 0, 0, m_pRenderer, SDL_FLIP_HORIZONTAL);
+    TheTextureManager::Instance()->drawFrame("Floor", 0, 1153, 640, 383, 0, 0, m_pRenderer, SDL_FLIP_HORIZONTAL);
+    TheTextureManager::Instance()->drawFrame("Floor", 0, 385, 640, 383, 0, 0, m_pRenderer, SDL_FLIP_VERTICAL);
+    TileSpawner::Instance()->draw();
     for (auto& go : m_gameObjects)
     {
         go->draw();
     }
+    
 
     SDL_RenderPresent(m_pRenderer); //화면을 그림 -> 백버퍼를 프론트 버퍼로
 }

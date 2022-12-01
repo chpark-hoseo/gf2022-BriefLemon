@@ -1,27 +1,24 @@
 #pragma once
 #include "Player.h"
 #include "Tile.h"
+#include <vector>
 
 class ColliderManager {
 public:
-	static ColliderManager* instance()
-	{
-		if (s_pInstance == NULL)
-			s_pInstance = new ColliderManager;
-		return s_pInstance;
-	}
-
 	void setGameObject(Player* player, Tile* tile);
-	void update();
+	void update(std::vector<Tile*> m_Tiles);
 
 private:
-	ColliderManager() = default;
-	static ColliderManager* s_pInstance;
 
 	Player* m_player;
 	Tile* m_tile;
 
-	int pX, pY, pW, pH;
-	int tX, tY, tW, tH;
+	std::vector<Tile*> m_Tiles;
 
-}typedef TheCollider;
+	int pX, pY, pW, pH;
+	int tX[20], tY[20], tW[20], tH[20];
+	bool isOnPlatform = false;
+
+	void checkPlatform();
+
+};

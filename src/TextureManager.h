@@ -5,6 +5,7 @@
 #include <map>
 #include <string>
 #include <iostream>
+#include "Player.h"
 
 class TextureManager {
 private:
@@ -12,6 +13,8 @@ private:
     static TextureManager* s_pInstance;
 
     std::map<std::string, SDL_Texture*> m_textureMap;
+
+    Player* m_player;
 public:
     static TextureManager* Instance()
     {
@@ -19,6 +22,8 @@ public:
             s_pInstance = new TextureManager();
         return s_pInstance;
     }
+
+    void getGameObject(Player* player);
 
     bool load(std::string fileName, std::string id, SDL_Renderer* pRenderer);
 
