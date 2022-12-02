@@ -98,7 +98,7 @@ void Player::handleInput() {
 
         if (TheInputHandler::Instance()->isKeyDown(SDL_SCANCODE_SPACE)) {
             m_playerRow = 1;
-            m_playerFrame = (SDL_GetTicks() / 150 % 2);
+            m_playerFrame = 1;
             m_velocity.setX(0);
 
             if (m_curFuel < m_maxFuel) {

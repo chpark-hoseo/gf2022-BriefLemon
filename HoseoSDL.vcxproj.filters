@@ -39,7 +39,7 @@
     <ClCompile Include="src\Tile.cpp">
       <Filter>소스 파일</Filter>
     </ClCompile>
-    <ClCompile Include="src\TileSpawner.cpp">
+    <ClCompile Include="src\TileManager.cpp">
       <Filter>소스 파일</Filter>
     </ClCompile>
   </ItemGroup>
@@ -71,7 +71,7 @@
     <ClInclude Include="src\Tile.h">
       <Filter>헤더 파일</Filter>
     </ClInclude>
-    <ClInclude Include="src\TileSpawner.h">
+    <ClInclude Include="src\TileManager.h">
       <Filter>헤더 파일</Filter>
     </ClInclude>
   </ItemGroup>
