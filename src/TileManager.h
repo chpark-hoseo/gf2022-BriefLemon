@@ -17,6 +17,7 @@ public:
     void init(int i);
     void draw();
     void update();
+    void clean();
 
     void setGameObject(Player* player);
 

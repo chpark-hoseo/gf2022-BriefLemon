@@ -3,6 +3,7 @@
 
 const int SCREEN_WIDTH = 640;
 const int SCREEN_HEIGHT = 768;
+const int GAME_HEIGHT = 3;
 
 class GameObject {
 

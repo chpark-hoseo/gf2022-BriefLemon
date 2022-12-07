@@ -65,8 +65,8 @@ bool TileManager::platformCheck(int i) {
     tH = m_Tiles[i]->getHeight();
 
     if (pX + pW > tX[i] && pX < tX[i] + tW - 12) {
-        if (pY + pH <= tY[i] + 20 && pY + pH > tY[i] - 10) {
-            if (m_player->jumpHeight >= 0) {
+        if (pY + pH <= tY[i] + 25 && pY + pH > tY[i] + 5) {
+            if (m_player->curSpeed >= 0) {
                 std::cout << pX << " , " << pY << " : " << tX[i] << " , " << tY[i] << std::endl;
                 touchPlatform = true;
                 return true;
@@ -74,6 +74,13 @@ bool TileManager::platformCheck(int i) {
         }
     }
     return false;
+}
+
+void TileManager::clean() {
+    for (auto& tiles : m_Tiles)
+    {
+        delete tiles;
+    }
 }
 
 TileManager* TileManager::s_pInstance = 0;

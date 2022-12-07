@@ -112,5 +112,9 @@ void Game::clean()
     TheTextureManager::Instance()->destroyTexture("Floor");
     TheTextureManager::Instance()->destroyTexture("BG");
     TheTextureManager::Instance()->destroyTexture("Platform");
+    for (auto& go : m_gameObjects)
+    {
+        go->clean();
+    }
     SDL_Quit();
 }

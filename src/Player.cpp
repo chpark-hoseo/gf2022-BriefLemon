@@ -28,27 +28,28 @@ void Player::update()
 {
     handleInput();
     SDLGameObject::update();
+    curSpeed = m_velocity.getY();
 
     if (onFloor) {
         m_velocity.setY(0);
-        jumpHeight = 0;
+        jumpSpeed = 0;
         isJump = false;
     }
     else {
         m_currentRow = 2;
         m_currentFrame = 0;
-        m_velocity.setY(jumpHeight);
+        m_velocity.setY(jumpSpeed);
         m_acceleration.setY(m_accelerator);
     }
 
-    if (m_position.getY() > 2304 - m_height) {
-        m_position.setY(2304 - m_height);
+    if (m_position.getY() > SCREEN_HEIGHT * GAME_HEIGHT - m_height) {
+        m_position.setY(SCREEN_HEIGHT * GAME_HEIGHT - m_height);
         onFloor = true;
     }
 
     if (isJump == true) {                                   //점프 상태일 경우
-            m_accelerator = m_accelerator + 0.2;            //가속도 상승
-            jumpHeight = jumpHeight + m_gravity;            //점프높이 계속 감소
+            m_accelerator = m_accelerator + m_accelPlus;            //가속도 상승
+            jumpSpeed = jumpSpeed + m_gravity;            //점프높이 계속 감소
             m_curFuel = 0;                                  //충전값 초기화
             onFloor = false;
 
@@ -59,7 +60,7 @@ void Player::update()
                 m_velocity.setX(-m_velocity.getX());
             }
 
-            if (jumpHeight > 0)
+            if (jumpSpeed > 0)
             {
                 isJump = false;                             //점프상태 해제
             }
@@ -118,9 +119,10 @@ void Player::jump() {
         else if (TheInputHandler::Instance()->isKeyDown(SDL_SCANCODE_LEFT)) m_velocity.setX(-m_curFuel / 15);
         else m_velocity.setX(0);
 
-        jumpHeight -= 6 + m_curFuel / (m_maxFuel / 15);   //점프높이에 현재 충전값의 일부를 더함
-        isJump = true;                              //점프 상태가 된다
-        onFloor = false;                            //바닥에서 떨어져있는 상태가 된다
+        jumpSpeed -= 6 + m_curFuel / (m_maxFuel / 15);   //점프높이에 현재 충전값의 일부를 더함
+        isJump = true;                                  //점프 상태가 된다
+        onFloor = false;                                //바닥에서 떨어져있는 상태가 된다
+        m_position.setY(m_position.getY() - 15);
         m_accelerator = 0.0f;                          //가속도 초기화
     }
 }
