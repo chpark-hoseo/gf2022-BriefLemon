@@ -1,6 +1,7 @@
 #include "Game.h"
 #include "Player.h"
 #include "TileManager.h"
+#include "ScreenManager.h"
 #include "InputHandler.h"
 
 Game* Game::s_pInstance = 0;
@@ -28,8 +29,14 @@ bool Game::init(const char* title, int xpos, int ypos, int width, int height, in
         }
 
         //Texture 생성
+        if (!TheTextureManager::Instance()->load("assets/StartScreen.png", "startScreen", m_pRenderer)) { return false; }
+        if (!TheTextureManager::Instance()->load("assets/StartButton.png", "startButton", m_pRenderer)) { return false; }
+        if (!TheTextureManager::Instance()->load("assets/ExitButton.png", "exitButton", m_pRenderer)) { return false; }
+        if (!TheTextureManager::Instance()->load("assets/ClearScreen.png", "clearScreen", m_pRenderer)) { return false; }
         if (!TheTextureManager::Instance()->load("assets/Slime.png", "slime", m_pRenderer)) { return false; }
         if (!TheTextureManager::Instance()->load("assets/starBG.png", "BG", m_pRenderer)) { return false; }
+        if (!TheTextureManager::Instance()->load("assets/Earth.png", "earth", m_pRenderer)) { return false; }
+        if (!TheTextureManager::Instance()->load("assets/RedPlanet.png", "redPlanet", m_pRenderer)) { return false; }
         if (!TheTextureManager::Instance()->load("assets/Floor.png", "Floor", m_pRenderer)) { return false; }
         if (!TheTextureManager::Instance()->load("assets/platform.png", "Tile", m_pRenderer)) { return false; }
 
@@ -37,12 +44,10 @@ bool Game::init(const char* title, int xpos, int ypos, int width, int height, in
 
         TheTextureManager::Instance()->getGameObject(player);
 
-        TileManager::Instance()->setGameObject(player);
-        TileManager::Instance()->init(15);
+        TileManager::Instance()->init(player, 15);
+        ScreenManager::Instance()->init(player, m_pRenderer);
 
         m_gameObjects.push_back(player);
-        //m_gameObjects.push_back(tile);
-        //m_gameObjects.push_back(tile2);
     }
     else {
         return false; // SDL 초기화 실패
@@ -58,8 +63,8 @@ void Game::update()
     {
         go->update();
     }
-
     TileManager::Instance()->update();
+    TheScreenManager::Instance()->update();
 }
 
 void Game::render()
@@ -68,14 +73,14 @@ void Game::render()
 
     TheTextureManager::Instance()->drawFrame("BG", 0, 0, 640, 2304, 0, 0, m_pRenderer);
     TheTextureManager::Instance()->drawFrame("Floor", 0, 1921, 640, 383, 0, 0, m_pRenderer, SDL_FLIP_HORIZONTAL);
-    TheTextureManager::Instance()->drawFrame("Floor", 0, 1153, 640, 383, 0, 0, m_pRenderer, SDL_FLIP_HORIZONTAL);
-    TheTextureManager::Instance()->drawFrame("Floor", 0, 385, 640, 383, 0, 0, m_pRenderer, SDL_FLIP_VERTICAL);
+    TheTextureManager::Instance()->drawFrame("redPlanet", 300, 940, 708, 708, 0, 0, m_pRenderer);
+    TheTextureManager::Instance()->drawFrame("earth", -600, 130, 894, 894, 0, 0, m_pRenderer, SDL_FLIP_VERTICAL);
     TileManager::Instance()->draw();
     for (auto& go : m_gameObjects)
     {
         go->draw();
     }
-    
+    TheScreenManager::Instance()->draw();
 
     SDL_RenderPresent(m_pRenderer); //화면을 그림 -> 백버퍼를 프론트 버퍼로
 }
@@ -116,5 +121,7 @@ void Game::clean()
     {
         go->clean();
     }
+    TileManager::Instance()->clean();
+    TheScreenManager::Instance()->clean();
     SDL_Quit();
 }

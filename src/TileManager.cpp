@@ -3,12 +3,10 @@
 #include <ctime>
 #include <iostream>
 
-void TileManager::setGameObject(Player* player) {
-    this->m_player = player;
-}
-
-void TileManager::init(int i) {
+void TileManager::init(Player* player, int i) {
     std::srand((unsigned int)time(NULL));
+
+    this->m_player = player;
 
     for (int x = 0; x < i - 1; x++) {
         Tile* tempTile = new Tile(new LoaderParams(0, 0, 100, 50, "Tile", 0, 0, SDL_FLIP_NONE));
@@ -65,7 +63,7 @@ bool TileManager::platformCheck(int i) {
     tH = m_Tiles[i]->getHeight();
 
     if (pX + pW > tX[i] && pX < tX[i] + tW - 12) {
-        if (pY + pH <= tY[i] + 25 && pY + pH > tY[i] + 5) {
+        if (pY + pH <= tY[i] + 15 && pY + pH > tY[i] - 15) {
             if (m_player->curSpeed >= 0) {
                 std::cout << pX << " , " << pY << " : " << tX[i] << " , " << tY[i] << std::endl;
                 touchPlatform = true;

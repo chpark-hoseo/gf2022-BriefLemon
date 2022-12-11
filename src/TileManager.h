@@ -14,12 +14,10 @@ public:
         return s_pInstance;
     }
 
-    void init(int i);
+    void init(Player* player, int i);
     void draw();
     void update();
     void clean();
-
-    void setGameObject(Player* player);
 
 private:
     TileManager() {}

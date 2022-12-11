@@ -142,17 +142,23 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="src\ExitButton.cpp" />
     <ClCompile Include="src\Game.cpp" />
     <ClCompile Include="src\InputHandler.cpp" />
     <ClCompile Include="src\main.cpp" />
     <ClCompile Include="src\Player.cpp" />
+    <ClCompile Include="src\ScreenManager.cpp" />
     <ClCompile Include="src\SDLGameObject.cpp" />
+    <ClCompile Include="src\StartButton.cpp" />
     <ClCompile Include="src\TextureManager.cpp" />
     <ClCompile Include="src\Tile.cpp" />
     <ClCompile Include="src\TileManager.cpp" />
     <ClCompile Include="src\Vector2D.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="src\ExitButton.h" />
+    <ClInclude Include="src\ScreenManager.h" />
+    <ClInclude Include="src\StartButton.h" />
     <ClInclude Include="src\Game.h" />
     <ClInclude Include="src\GameObject.h" />
     <ClInclude Include="src\InputHandler.h" />

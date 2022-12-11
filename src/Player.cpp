@@ -30,6 +30,10 @@ void Player::update()
     SDLGameObject::update();
     curSpeed = m_velocity.getY();
 
+    if (m_position.getY() < 0) {
+
+    }
+
     if (onFloor) {
         m_velocity.setY(0);
         jumpSpeed = 0;

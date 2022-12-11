@@ -29,6 +29,7 @@ public:
 
 private:
 	std::vector<GameObject*> m_gameObjects;
+	std::vector<GameObject*> m_buttons;
 
 	SDL_Window* m_pWindow;
 	SDL_Renderer* m_pRenderer;
